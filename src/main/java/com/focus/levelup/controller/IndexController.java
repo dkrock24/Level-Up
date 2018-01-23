@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.focus.levelup.entity.Role;
+import com.focus.levelup.model.Roles;
 import com.focus.levelup.services.RoleServices;
 
 @Controller
@@ -19,9 +19,9 @@ public class IndexController {
 	@RequestMapping("/index")
 	public String demo(Model model) {
 		
-		List<Role> role =  (List<Role>) roleServices.findAll();
+		List<Roles> role =  (List<Roles>) roleServices.findAll();
 		
-		for(Role roles : role) {
+		for(Roles roles : role) {
 			System.out.println(roles.getRole());
 		}
 		

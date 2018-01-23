@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="Level-Up">
-		<class>com.focus.levelup.entity.Role</class>
+		<class>com.focus.levelup.model.Answer</class>
+		<class>com.focus.levelup.model.ProgrammingLanguage</class>
+		<class>com.focus.levelup.model.QuestionTypes</class>
+		<class>com.focus.levelup.model.Questions</class>
+		<class>com.focus.levelup.model.QuizLevels</class>
+		<class>com.focus.levelup.model.Quizzes</class>
+		<class>com.focus.levelup.model.Roles</class>
+		<class>com.focus.levelup.model.TestResults</class>
+		<class>com.focus.levelup.model.Tests</class>
+		<class>com.focus.levelup.model.Users</class>
 	</persistence-unit>
 </persistence>
