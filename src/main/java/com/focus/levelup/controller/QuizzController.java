@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.focus.levelup.model.ProgrammingLanguage;
 import com.focus.levelup.model.Users;
@@ -73,7 +74,7 @@ public class QuizzController {
 	}
 	
 	@RequestMapping("saveLanguage")
-	public String saveLanguage(@ModelAttribute("ProgrammingLanguage") ProgrammingLanguage languages, BindingResult result) {
+	public ModelAndView saveLanguage(@ModelAttribute("ProgrammingLanguage") ProgrammingLanguage languages, BindingResult result) {
 		
 		ProgrammingLanguage pl = new ProgrammingLanguage();
 		pl.setLanguage(languages.getLanguage());
@@ -81,7 +82,7 @@ public class QuizzController {
 		
 		languagesServices.save(pl);
 		
-		return "quizz/addLanguages";
+		return new ModelAndView("redirect:/Quizz/addLanguages");
 	}
 	
 	
