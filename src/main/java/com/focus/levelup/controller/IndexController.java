@@ -11,19 +11,16 @@ import com.focus.levelup.model.Roles;
 import com.focus.levelup.services.RoleServices;
 
 @Controller
+@RequestMapping("Dashboard")
 public class IndexController {
 
 	@Autowired
 	RoleServices roleServices;
 	
-	@RequestMapping("/index")
+	@RequestMapping("index")
 	public String demo(Model model) {
 		
 		List<Roles> role =  (List<Roles>) roleServices.findAll();
-		
-		for(Roles roles : role) {
-			System.out.println(roles.getRole());
-		}
 		
 		model.addAttribute("data", role);
 		return "home/index";
