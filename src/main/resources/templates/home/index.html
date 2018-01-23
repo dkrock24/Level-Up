@@ -4,6 +4,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1 th:text="${data}"></h1>
+	<table th:each="roles : ${data}" class="table">
+		<tr>
+			<td th:text="${ roles.role }"></td>
+		</tr>
+	</table>
+
 </body>
 </html>
