@@ -20,7 +20,8 @@ public class Answer implements Serializable {
 	@Column(name="id_answer")
 	private int idAnswer;
 
-	private Object answer;
+	@Lob
+	private String answer;
 
 	@Column(name="created_by")
 	private String createdBy;
@@ -60,11 +61,11 @@ public class Answer implements Serializable {
 		this.idAnswer = idAnswer;
 	}
 
-	public Object getAnswer() {
+	public String getAnswer() {
 		return this.answer;
 	}
 
-	public void setAnswer(Object answer) {
+	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
 

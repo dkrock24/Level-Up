@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.focus.levelup.model.Roles;
+import com.focus.levelup.model.Statuses;
 import com.focus.levelup.services.RoleServices;
 
 @Controller
@@ -25,7 +26,7 @@ public class RolesController {
 	@RequestMapping("index")
 	public String roles(Model model) {
 		
-		List<Roles> role =  (List<Roles>) roleServices.findAll();
+		List<Roles> role =  (List<Roles>) roleServices.findAllByStatus(Statuses.ACTIVE.getValue());
 		
 		model.addAttribute("data", role);
 		
