@@ -21,6 +21,8 @@ public class ProgrammingLanguage implements Serializable {
 
 	private String language;
 
+	private int status;
+
 	//bi-directional many-to-one association to Quizzes
 	@OneToMany(mappedBy="programmingLanguage")
 	private List<Quizzes> quizzes;
@@ -42,6 +44,14 @@ public class ProgrammingLanguage implements Serializable {
 
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+
+	public int getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public List<Quizzes> getQuizzes() {

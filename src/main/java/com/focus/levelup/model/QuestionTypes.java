@@ -22,6 +22,8 @@ public class QuestionTypes implements Serializable {
 	@Column(name="friendly_name")
 	private String friendlyName;
 
+	private int status;
+
 	private String type;
 
 	//bi-directional many-to-one association to Questions
@@ -45,6 +47,14 @@ public class QuestionTypes implements Serializable {
 
 	public void setFriendlyName(String friendlyName) {
 		this.friendlyName = friendlyName;
+	}
+
+	public int getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public String getType() {

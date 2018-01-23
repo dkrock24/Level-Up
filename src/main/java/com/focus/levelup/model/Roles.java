@@ -20,6 +20,8 @@ public class Roles implements Serializable {
 
 	private String role;
 
+	private int status;
+
 	//bi-directional many-to-one association to Users
 	@OneToMany(mappedBy="role")
 	private List<Users> users;
@@ -41,6 +43,14 @@ public class Roles implements Serializable {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public int getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public List<Users> getUsers() {

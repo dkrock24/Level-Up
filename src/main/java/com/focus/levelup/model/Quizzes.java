@@ -2,6 +2,7 @@ package com.focus.levelup.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -18,18 +19,27 @@ public class Quizzes implements Serializable {
 	@Column(name="id_quiz")
 	private int idQuiz;
 
+	@Column(name="created_by")
+	private String createdBy;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="created_on")
+	private Date createdOn;
+
 	private String description;
 
 	private int status;
 
+	@Column(name="updated_by")
+	private String updatedBy;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="updated_on")
+	private Date updatedOn;
+
 	//bi-directional many-to-one association to Questions
 	@OneToMany(mappedBy="quizze")
 	private List<Questions> questions;
-
-	//bi-directional many-to-one association to Users
-	@ManyToOne
-	@JoinColumn(name="id_amin")
-	private Users user;
 
 	//bi-directional many-to-one association to ProgrammingLanguage
 	@ManyToOne
@@ -40,6 +50,11 @@ public class Quizzes implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_level")
 	private QuizLevels quizLevel;
+
+	//bi-directional many-to-one association to Users
+	@ManyToOne
+	@JoinColumn(name="id_amin")
+	private Users user;
 
 	//bi-directional many-to-one association to Tests
 	@OneToMany(mappedBy="quizze")
@@ -56,6 +71,22 @@ public class Quizzes implements Serializable {
 		this.idQuiz = idQuiz;
 	}
 
+	public String getCreatedBy() {
+		return this.createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getCreatedOn() {
+		return this.createdOn;
+	}
+
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
+	}
+
 	public String getDescription() {
 		return this.description;
 	}
@@ -70,6 +101,22 @@ public class Quizzes implements Serializable {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public String getUpdatedBy() {
+		return this.updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public Date getUpdatedOn() {
+		return this.updatedOn;
+	}
+
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
 	}
 
 	public List<Questions> getQuestions() {
@@ -94,14 +141,6 @@ public class Quizzes implements Serializable {
 		return question;
 	}
 
-	public Users getUser() {
-		return this.user;
-	}
-
-	public void setUser(Users user) {
-		this.user = user;
-	}
-
 	public ProgrammingLanguage getProgrammingLanguage() {
 		return this.programmingLanguage;
 	}
@@ -116,6 +155,14 @@ public class Quizzes implements Serializable {
 
 	public void setQuizLevel(QuizLevels quizLevel) {
 		this.quizLevel = quizLevel;
+	}
+
+	public Users getUser() {
+		return this.user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
 	}
 
 	public List<Tests> getTests() {

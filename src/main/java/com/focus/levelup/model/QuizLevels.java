@@ -21,6 +21,8 @@ public class QuizLevels implements Serializable {
 
 	private String level;
 
+	private int status;
+
 	//bi-directional many-to-one association to Quizzes
 	@OneToMany(mappedBy="quizLevel")
 	private List<Quizzes> quizzes;
@@ -42,6 +44,14 @@ public class QuizLevels implements Serializable {
 
 	public void setLevel(String level) {
 		this.level = level;
+	}
+
+	public int getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public List<Quizzes> getQuizzes() {

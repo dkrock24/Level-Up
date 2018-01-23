@@ -2,6 +2,7 @@ package com.focus.levelup.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -19,10 +20,25 @@ public class Answer implements Serializable {
 	@Column(name="id_answer")
 	private int idAnswer;
 
-	@Lob
-	private String answer;
+	private Object answer;
+
+	@Column(name="created_by")
+	private String createdBy;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="created_on")
+	private Date createdOn;
 
 	private int score;
+
+	private int status;
+
+	@Column(name="updated_by")
+	private String updatedBy;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="updated_on")
+	private Date updatedOn;
 
 	//bi-directional many-to-one association to Questions
 	@ManyToOne
@@ -44,12 +60,28 @@ public class Answer implements Serializable {
 		this.idAnswer = idAnswer;
 	}
 
-	public String getAnswer() {
+	public Object getAnswer() {
 		return this.answer;
 	}
 
-	public void setAnswer(String answer) {
+	public void setAnswer(Object answer) {
 		this.answer = answer;
+	}
+
+	public String getCreatedBy() {
+		return this.createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getCreatedOn() {
+		return this.createdOn;
+	}
+
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
 	}
 
 	public int getScore() {
@@ -58,6 +90,30 @@ public class Answer implements Serializable {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	public int getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getUpdatedBy() {
+		return this.updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public Date getUpdatedOn() {
+		return this.updatedOn;
+	}
+
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
 	}
 
 	public Questions getQuestion() {
