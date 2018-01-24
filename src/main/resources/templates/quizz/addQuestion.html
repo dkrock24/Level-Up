@@ -239,101 +239,94 @@
 					</div>
 					<div class="row">
 
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<div class="card">
 								<div class="header">
-									<h4 class="title">Quizz Admin</h4>
-									<p class="category">Quizzes Created</p>
+									<h2 class="title">
+										<i class="ti-pencil"></i>
+									</h2>
+									<p class="category">Questions Section for :</p>
+									<p
+										th:text="${ quizz.ProgrammingLanguage.language } +' - '+ ${ quizz.QuizLevel.level } +' - '+ ${ quizz.description }"></p>
 								</div>
 								<div class="content table-responsive table-full-width">
-								<form action="../saveQuizz" method="post" modelAttribute="Quizzes"> 
-									<table class="table table-hover">
-										<thead>
-											<th>Languages</th>
-											<th>Level</th>
-											<th>Description</th>
-											<th>Status</th>
-											<th><a th:href="@{'/Quizz/index/' }"
-												class="btn btn-info">Back</a></th>
-										</thead>
-										<tbody>
-											<tr>
-												<td><select name="ProgrammingLanguage" class="form-control">
-														<option th:each="lg : ${ languages }" th:value="${ lg.idLanguage }" th:text="${ lg.language }"></option>
-												</select>
-												</td>
-												<td><select name="QuizLevel" class="form-control">
-														<option th:each="ql : ${ ql }" th:value="${ ql.idLevel }" th:text="${ ql.level }"></option>
-												</select>
-												</td>
-
-												<td>
-												<input type="text" name="description" value="" placeholder="Description" class="form-control"/>
-												</td>
-
-												<td th:switch="${ quizzes.status }">
-													<select name="status" class="form-control">
-														<option value="1">Enable</option>
-														<option value="0">Disabled</option>
-													</select>
-												</td>
-												<td><input type="submit" name="send" value="Save" class="form-control btn btn-info"/></td>
-											</tr>
-										</tbody>
-									</table>
+									<form action="../saveQuizz" method="post"
+										modelAttribute="Questions">
+										<input type="hidden" name="Quizzes" th:value="${ quizz.idQuiz }"/>
+										<table class="table table-hover">
+											<thead>
+												<th class="alert alert-info">Entity</th>
+												<th class="alert alert-info">Value</th>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Input Type</td>
+													<td><select name="QuestionTypes" class="form-control">
+															<option th:each="qt : ${ questionTypes }"
+																th:value="${ qt.idType}" th:text="${ qt.type }"></option>
+													</select></td>
+												</tr>
+												<tr>
+													<td>Question</td>
+													<td><textarea class="form-control" name="question"></textarea></td>
+												</tr>
+												<tr>
+													<td>Status</td>
+													<td><select name="status" class="form-control">
+															<option value="1">Enable</option>
+															<option value="0">Disabled</option>
+													</select></td>
+												</tr>
+												<tr>
+													<td></td>
+													<td><input type="submit" name="send" value="Save"
+														class="form-control btn btn-info" /></td>
+												</tr>
+											</tbody>
+										</table>
 									</form>
 
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row">
 						<div class="col-md-6">
 							<div class="card">
 								<div class="header">
-									<h4 class="title">Email Statistics</h4>
-									<p class="category">Last Campaign Performance</p>
+									<h2 class="title">
+										<i class="ti-pencil-alt"></i>
+									</h2>
+									<p class="category">Question List</p>
+									<p>...</p>
 								</div>
-								<div class="content">
-									<div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-
-									<div class="footer">
-										<div class="chart-legend">
-											<i class="fa fa-circle text-info"></i> Open <i
-												class="fa fa-circle text-danger"></i> Bounce <i
-												class="fa fa-circle text-warning"></i> Unsubscribe
-										</div>
-										<hr />
-										<div class="stats">
-											<i class="ti-timer"></i> Campaign sent 2 days ago
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="card ">
-								<div class="header">
-									<h4 class="title">2015 Sales</h4>
-									<p class="category">All products including Taxes</p>
-								</div>
-								<div class="content">
-									<div id="chartActivity" class="ct-chart"></div>
-
-									<div class="footer">
-										<div class="chart-legend">
-											<i class="fa fa-circle text-info"></i> Tesla Model S <i
-												class="fa fa-circle text-warning"></i> BMW 5 Series
-										</div>
-										<hr />
-										<div class="stats">
-											<i class="ti-check"></i> Data information certified
-										</div>
-									</div>
+								<div class="content table-responsive table-full-width">
+									<table class="table table-hover">
+										<thead>
+											<th class="alert alert-info">ID</th>
+											<th class="alert alert-info">Question</th>
+											<th class="alert alert-info">Type</th>
+											<th class="alert alert-info">Status</th>
+											<th class="alert alert-info"></th>
+										</thead>
+										<tbody>
+											<tr th:each="q ,iteration : ${ question }">
+												<td th:text="${ iteration.index+1 }"></td>
+												<td th:text="${ q.question }"></td>
+												<td th:text="${ q.QuestionType.type}"></td>
+												<td th:switch="${ q.status }"><label th:case="0"
+													class="label label-warning" style="color: white">Inactive</label>
+													<label th:case="1" class="label label-success"
+													style="color: white">Active</label></td>
+												<td><a href="" class="btn btn-primary">Edit Question</a><a href="" class="btn btn-primary">Add Answer</a></td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
+
+
 					</div>
+
 				</div>
 			</div>
 

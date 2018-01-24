@@ -246,7 +246,9 @@
 									<p class="category">Quizzes Created</p>
 								</div>
 								<div class="content table-responsive table-full-width">
-								<form action="../saveQuizz" method="post" modelAttribute="Quizzes"> 
+								<form action="../updateQuizz" method="post" modelAttribute="Quizzes"> 
+									<input type="hidden" name="idQuiz" th:value="${ quizz.idQuiz }" class="form-control"/>
+									<input type="hidden" name="User" th:value="${ quizz.User.idUser }" class="form-control"/>
 									<table class="table table-hover">
 										<thead>
 											<th>Languages</th>
@@ -259,22 +261,22 @@
 										<tbody>
 											<tr>
 												<td><select name="ProgrammingLanguage" class="form-control">
-														<option th:each="lg : ${ languages }" th:value="${ lg.idLanguage }" th:text="${ lg.language }"></option>
+														<option th:each="lg : ${ languages }" th:value="${ lg.idLanguage }" th:text="${ lg.language }" th:selected="(${quizz.ProgrammingLanguage.language} == *{lg.language})"></option>
 												</select>
 												</td>
 												<td><select name="QuizLevel" class="form-control">
-														<option th:each="ql : ${ ql }" th:value="${ ql.idLevel }" th:text="${ ql.level }"></option>
+														<option th:each="ql : ${ ql }" th:value="${ ql.idLevel }" th:text="${ ql.level }" th:selected="(${quizz.QuizLevel.level} == *{ql.level})"></option>
 												</select>
 												</td>
 
 												<td>
-												<input type="text" name="description" value="" placeholder="Description" class="form-control"/>
+												<input type="text" name="description" th:value="${ quizz.description }" placeholder="Description" class="form-control"/>
 												</td>
 
-												<td th:switch="${ quizzes.status }">
-													<select name="status" class="form-control">
-														<option value="1">Enable</option>
-														<option value="0">Disabled</option>
+												<td>
+													<select name="status" class="form-control">																																								
+														<option th:selected="(${quizz.status} == *{1})" value="1">Active</option>
+														<option th:selected="(${quizz.status} != *{1})" value="2">Inactive</option>
 													</select>
 												</td>
 												<td><input type="submit" name="send" value="Save" class="form-control btn btn-info"/></td>

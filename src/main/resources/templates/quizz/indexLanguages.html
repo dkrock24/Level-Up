@@ -277,7 +277,11 @@
 												<td th:text="${ quizz.updatedOn }"></td>
 												<td><a
 													th:href="@{'/Quizz/editQuizz/' + ${ quizz.idQuiz } }"
-													class="btn btn-default">Edit</a></td>
+													class="btn btn-success">Edit</a>
+													<a
+													th:href="@{'/Quizz/editQuizz/' + ${ quizz.idQuiz } }"
+													class="btn btn-info">Detail</a>
+													</td>
 											</tr>
 
 										</tbody>
