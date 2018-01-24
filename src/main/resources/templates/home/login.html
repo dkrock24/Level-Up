@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- HEADER -->
+<head th:replace="fragments/header :: header"></head>
+<body>
+	<br/>
+	<h1 class="login-title">LevelUp</h1>
+	<div class="container jumbotron">
+
+		<form th:action="@{/login}" method="POST" class="form-signin">
+
+			<input type="text"  class="form-control login-align" placeholder="email" />
+
+			<input type="password"  class="form-control login-align" placeholder="password" />
+			<div class="col-md-12 text-center">
+				<button type="submit" class="btn btn-primary submit-btn">Login</button>
+			</div>
+
+		</form>
+
+	</div>
+</body>
+</html>

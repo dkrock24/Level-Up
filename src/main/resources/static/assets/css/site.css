@@ -1,0 +1,16 @@
+.login-align {
+	background-color : #ffffff;
+	text-align: center !important;
+	margin-top: 5px;
+}
+
+.submit-btn {
+	margin-top: 10px;
+	color: #FFF;
+	background-color: #7A9E9F;
+}
+
+.login-title {
+	text-align: center;
+    color: #7A9E9F;
+}
