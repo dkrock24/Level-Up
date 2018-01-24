@@ -12,4 +12,8 @@ public interface AnswerService extends CrudRepository<Answer, Integer> {
 
 	@Query("SELECT a FROM Answer a WHERE a.status = :status")
 	List<Answer> findAllByStatus(@Param("status") int status);
+
+	//Get all active answers of a question
+	@Query("SELECT a FROM Answer a WHERE a.status = 1 AND a.question.idQuestions = :questionId")
+	List<Answer> findAllActiveByQuestionId(@Param("questionId") int questionId);
 }

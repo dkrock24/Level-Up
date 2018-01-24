@@ -22,7 +22,7 @@ import com.focus.levelup.services.UserService;
 public class UsersController {
 
 	@Autowired
-	UserService usersServices;
+	UserService usersService;
 	
 	@Autowired
 	RoleServices roleServices;
@@ -30,7 +30,7 @@ public class UsersController {
 	@RequestMapping("index")
 	public String users(Model model) {
 		
-		List<Users> user =  (List<Users>) usersServices.findAll();
+		List<Users> user =  (List<Users>) usersService.findAll();
 		
 		model.addAttribute("users", user);
 		
@@ -40,7 +40,7 @@ public class UsersController {
 	@RequestMapping(value= "edit/{id}", method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable int id) {
 		
-		Users user =  usersServices.findOne(id);
+		Users user =  usersService.findOne(id);
 		
 		List<Roles> role =  (List<Roles>) roleServices.findAll();
 		
@@ -53,7 +53,7 @@ public class UsersController {
 	@RequestMapping(value= "saveUpdate", method = RequestMethod.POST)
 	public ModelAndView saveUpdate(@ModelAttribute("Users") Users users, BindingResult result ) {
 		
-		Users user =  usersServices.findOne(users.getIdUser());
+		Users user =  usersService.findOne(users.getIdUser());
 		
 		user.setRole(users.getRole());		
 		user.setFirstName(users.getFirstName());
@@ -61,7 +61,7 @@ public class UsersController {
 		user.setEmail(users.getEmail());
 		user.setStatus(users.getStatus());
 		
-		usersServices.save( user );
+		usersService.save( user );
 		
 		return new ModelAndView("redirect:/Users/index");
 	}

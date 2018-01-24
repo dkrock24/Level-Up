@@ -5,7 +5,9 @@ import java.util.Map;
 
 public enum Statuses {
 	INACTIVE(0),
-	ACTIVE(1);
+	ACTIVE(1),
+	UNCHECKED(2),
+	REVIEWED(3);
 
 	private int value;
 	private static Map<Integer, Statuses> map = new HashMap<>();
