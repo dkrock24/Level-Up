@@ -246,42 +246,44 @@
 									<p class="category">Quizzes Created</p>
 								</div>
 								<div class="content table-responsive table-full-width">
+								<form action="../saveQuizz" method="post" modelAttribute="Quizzes"> 
 									<table class="table table-hover">
 										<thead>
-											<th>ID</th>
-											<th>Level</th>
 											<th>Languages</th>
-											<th>Description</th>
-											<th>Admin</th>
-											<th>Status</th>
-											<th>Created</th>
-											<th>Updated</th>
-											<th><a
-													th:href="@{'/Quizz/addQuizz/' }"
-													class="btn btn-info">New Quizz</a></th>
-										</thead>
-										<tbody th:each="quizz, iteration : ${ quizzes }">
-											<tr>
-												<td th:text="${ iteration.index+1 }"></td>
-												<td th:text="${ quizz.QuizLevel.level }"></td>
-												<td th:text="${ quizz.ProgrammingLanguage.language }"></td>
-												<td th:text="${ quizz.description }"></td>
-												<td th:text="${ quizz.User.firstName }+'.'+ ${ quizz.User.lastName }"></td>										
-												
-												<td th:switch="${ quizz.status }"><label
-													th:case="1" class="label label-success"
-													style="color: white">Active</label> <label th:case="0"
-													class="label label-warning" style="color: white">Inactive</label>
-												</td>
-												<td th:text="${ quizz.createdOn }"></td>
-												<td th:text="${ quizz.updatedOn }"></td>
-												<td><a
-													th:href="@{'/Quizz/editQuizz/' + ${ quizz.idQuiz } }"
-													class="btn btn-default">Edit</a></td>
-											</tr>
+											<th>Level</th>
 
+											<th>Description</th>
+											<th>Status</th>
+
+											<th><a th:href="@{'/Quizz/index/' }"
+												class="btn btn-info">Back</a></th>
+										</thead>
+										<tbody th:each="quizz : ${ quizzes }">
+											<tr>
+												<td><select name="idLanguage" class="form-control">
+														<option th:each="lg : ${ languages }" th:value="${ lg.idLanguage }" th:text="${ lg.language }"></option>
+												</select>
+												</td>
+												<td><select name="level" class="form-control">
+														<option th:each="ql : ${ ql }" th:value="${ ql.idLevel }" th:text="${ ql.level }"></option>
+												</select>
+												</td>
+
+												<td>
+												<input type="text" name="description" value="" placeholder="Description" class="form-control"/>
+												</td>
+
+												<td th:switch="${ quizz.status }">
+													<select name="status" class="form-control">
+														<option value="1">Enable</option>
+														<option value="0">Disabled</option>
+													</select>
+												</td>
+												<td><input type="submit" name="send" value="Save" class="form-control btn btn-info"/></td>
+											</tr>
 										</tbody>
 									</table>
+									</form>
 
 								</div>
 							</div>
