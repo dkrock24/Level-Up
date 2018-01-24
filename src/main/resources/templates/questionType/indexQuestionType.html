@@ -37,12 +37,6 @@
 	rel='stylesheet' type='text/css'/>
 <link th:href="@{ /assets/css/themify-icons.css }" rel="stylesheet" />
 
-<style>
-.line{
-border:1px solid grey;
-}
-</style>
-
 </head>
 <body>
 
@@ -130,7 +124,7 @@ border:1px solid grey;
 					<div class="row">
 						<div class="col-lg-3 col-sm-6">
 							<div class="card">
-								<div class="content" style="background:#C0C0C0">
+								<div class="content" >
 									<div class="row">
 										<div class="col-xs-5">
 											<div class="icon-big icon-danger text-center">
@@ -148,7 +142,7 @@ border:1px solid grey;
 										<hr />
 										<div class="stats">
 											
-											<a href="/Quizz/addLanguages" class="btn btn-danger"><i class="ti-plus"></i> Add and Updated now</a>
+											<a href="addLanguages" class="btn btn-danger"><i class="ti-plus"></i> Add and Updated now</a>
 											
 										</div>
 									</div>
@@ -175,7 +169,7 @@ border:1px solid grey;
 										<hr />
 										<div class="stats">
 										
-											<a href="/Level/addLevel" class="btn btn-success"><i class="ti-calendar"></i> Add and Updated now</a>
+											<a href="addLanguages" class="btn btn-success"><i class="ti-calendar"></i> Add and Updated now</a>
 											
 										</div>
 									</div>
@@ -184,7 +178,7 @@ border:1px solid grey;
 						</div>
 						<div class="col-lg-3 col-sm-6">
 							<div class="card">
-								<div class="content">
+								<div class="content" style="background:#C0C0C0">
 									<div class="row">
 										<div class="col-xs-5">
 											<div class="icon-big icon-info text-center">
@@ -193,7 +187,7 @@ border:1px solid grey;
 										</div>
 										<div class="col-xs-7">
 											<div class="numbers">
-												<p>Quizzes</p>
+												<p>Inputs Type</p>
 												<span th:text="${ countQuizz }"></span>
 											</div>
 										</div>
@@ -202,7 +196,7 @@ border:1px solid grey;
 										<hr />
 										<div class="stats">
 
-											<a href="/QuestionType/index" class="btn btn-info"><i class="ti-timer"></i> Add and Updated now</a>
+											<a href="addLanguages" class="btn btn-info"><i class="ti-timer"></i> Add and Updated now</a>
 											
 										</div>
 									</div>
@@ -242,78 +236,73 @@ border:1px solid grey;
 						<div class="col-md-12">
 							<div class="card">
 								<div class="header">
-									<h4 class="title">Add Programming Languages</h4>
-									<p class="category">Form</p>
+									<h4 class="title">Users Behavior</h4>
+									<p class="category">24 Hours performance</p>
 								</div>
 								<div class="content">
-								
-								<div class="row">
-										<div class="col-md-6">
-											<div class="card">
-												<div class="content table-responsive table-full-width">
-												<form action="saveLanguage" method="post" modelAttribute="ProgrammingLanguage">
-													<table class="table">
-														<thead class="alert alert-info">															
-															<th>Language Name</th>
-															<th>Language Status</th>																
-															<th>Actions</th>
-														</thead>
-														<tbody>
-															<tr>
-																<td><input type="text" name="language" class="form-control line" placeholder="Language Name"/></td>														
-																<td>
-																	<select name="status" class="form-control line">
-																	<option value="1">Enabled</option>
-																	<option value="0">Disabled</option>
-																	</select>
-																</td>															
-																<td>
-																	<input type="submit" name="send" value="Create" class="btn btn-info" />
-																</td>
-															</tr>
-														</tbody>
-													</table>
-												</form>
-
-												</div>
-											</div>
+									<div id="chartHours" class="ct-chart"></div>
+									<div class="footer">
+										<div class="chart-legend">
+											<i class="fa fa-circle text-info"></i> Open <i
+												class="fa fa-circle text-danger"></i> Click <i
+												class="fa fa-circle text-warning"></i> Click Second Time
 										</div>
-										
-										<div class="col-md-6">
-											<div class="monthly-grid">
-												<div class="content table-responsive table-full-width">
-													<table class="table table-striped">
-														<thead class="alert alert-info">
-															<th>ID</th>
-															<th>Language Name</th>
-															<th>Language Status</th>															
-															<th>Actions</th>
-														</thead>
-														<tbody th:each="languages,iteration : ${ pl }">
-															<tr>
-																<td th:text="${ iteration.index+1 }"></td>																
-																<td th:text="${ languages.language }"></td>
-																<td th:switch="${ languages.status }">
-																	<label th:case="1" class="label label-success" style="color:white">Active</label>
-																	<label th:case="0" class="label label-warning" style="color:white">Inactive</label>
-																</td>
-																<td>
-																<a th:href="@{'editLanguages/' + ${languages.idLanguage} }" class="btn btn-default">Edit</a>
-																</td>
-															</tr>
-														</tbody>
-													</table>
-
-												</div>
-											</div>
+										<hr/>
+										<div class="stats">
+											<i class="ti-reload"></i> Updated 3 minutes ago
 										</div>
 									</div>
-									
 								</div>
 							</div>
 						</div>
 					</div>
-					
+					<div class="row">
+						<div class="col-md-6">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Email Statistics</h4>
+									<p class="category">Last Campaign Performance</p>
+								</div>
+								<div class="content">
+									<div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+
+									<div class="footer">
+										<div class="chart-legend">
+											<i class="fa fa-circle text-info"></i> Open <i
+												class="fa fa-circle text-danger"></i> Bounce <i
+												class="fa fa-circle text-warning"></i> Unsubscribe
+										</div>
+										<hr/>
+										<div class="stats">
+											<i class="ti-timer"></i> Campaign sent 2 days ago
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="card ">
+								<div class="header">
+									<h4 class="title">2015 Sales</h4>
+									<p class="category">All products including Taxes</p>
+								</div>
+								<div class="content">
+									<div id="chartActivity" class="ct-chart"></div>
+
+									<div class="footer">
+										<div class="chart-legend">
+											<i class="fa fa-circle text-info"></i> Tesla Model S <i
+												class="fa fa-circle text-warning"></i> BMW 5 Series
+										</div>
+										<hr/>
+										<div class="stats">
+											<i class="ti-check"></i> Data information certified
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 

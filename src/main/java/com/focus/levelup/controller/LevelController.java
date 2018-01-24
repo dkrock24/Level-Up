@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.focus.levelup.model.ProgrammingLanguage;
+import com.focus.levelup.model.QuizLevels;
 import com.focus.levelup.model.Users;
 import com.focus.levelup.services.ProgrammingLanguageService;
 import com.focus.levelup.services.QuizLevelsService;
@@ -22,8 +23,8 @@ import com.focus.levelup.services.TestsService;
 
 
 @Controller
-@RequestMapping("Quizz")
-public class QuizzController {
+@RequestMapping("Level")
+public class LevelController {
 	
 	@Autowired
 	ProgrammingLanguageService languagesServices;
@@ -50,15 +51,15 @@ public class QuizzController {
 		model.addAttribute("countQuizz", countQuizz);
 		model.addAttribute("countPendingTest", countPendingTest);
 		
-		return "quizz/indexLanguages";
+		return "quizzLevel/indexLevel";
 	}
 	
-	@RequestMapping("addLanguages")
+	@RequestMapping("addLevel")
 	public String addLanguages(Model model) {
 		
-		List<ProgrammingLanguage> pl = (List<ProgrammingLanguage>) languagesServices.findAll();
+		List<QuizLevels> ql = (List<QuizLevels>) QlevelServices.findAll();
 		
-		model.addAttribute("pl",pl);
+		model.addAttribute("ql",ql);
 		
 		// Basic Count 
 		int countLanguages = (int) languagesServices.count();
@@ -72,53 +73,53 @@ public class QuizzController {
 		model.addAttribute("countPendingTest", countPendingTest);
 		// End Basic Count
 		
-		return "quizz/addLanguages";
+		return "quizzLevel/addLevel";
 	}
 	
 	/*
 	 * SAVE NEW PROGRAMMING LANGUAGES
 	 */
-	@RequestMapping("saveLanguage")
-	public ModelAndView saveLanguage(@ModelAttribute("ProgrammingLanguage") ProgrammingLanguage languages, BindingResult result) {
+	@RequestMapping("saveLevel")
+	public ModelAndView saveLevel(@ModelAttribute("QuizLevels") QuizLevels level, BindingResult result) {
 		
-		ProgrammingLanguage pl = new ProgrammingLanguage();
-		pl.setLanguage(languages.getLanguage());
-		pl.setStatus(languages.getStatus());
+		QuizLevels ql = new QuizLevels();
+		ql.setLevel(level.getLevel());
+		ql.setStatus(level.getStatus());
 		
-		languagesServices.save(pl);
+		QlevelServices.save(ql);
 		
-		return new ModelAndView("redirect:/Quizz/addLanguages");
+		return new ModelAndView("redirect:/Level/addLevel");
 	}	
 	
 	/*
 	 * EDIT PROGRAMMING LANGUAGES
 	 */
-	@RequestMapping(value ="editLanguages/{id}", method= RequestMethod.GET)
-	public String editLanguage(Model model,@PathVariable int id) {
+	@RequestMapping(value ="editLevel/{id}", method= RequestMethod.GET)
+	public String editLevel(Model model,@PathVariable int id) {
 		
-		List<ProgrammingLanguage> pl = (List<ProgrammingLanguage>) languagesServices.findAll();			
-		ProgrammingLanguage pl_edit = languagesServices.findOne(id);
+		List<QuizLevels> ql = (List<QuizLevels>) QlevelServices.findAll();			
+		QuizLevels ql_edit = QlevelServices.findOne(id);
 		
-		model.addAttribute("pl",pl);
-		model.addAttribute("languages", pl_edit);
+		model.addAttribute("ql",ql);
+		model.addAttribute("level", ql_edit);
 		
-		return ("quizz/editLanguages");
+		return ("quizzLevel/editLevel");
 	}
 	
 	
 	/*
 	 * UPDATE PROGRAMMING LANGUAGES
 	 */
-	@RequestMapping("updateLanguage")
-	public ModelAndView updateLanguage(@ModelAttribute("ProgrammingLanguage") ProgrammingLanguage languages, BindingResult result) {
+	@RequestMapping("updateLevel")
+	public ModelAndView updateLevel(@ModelAttribute("QuizLevels") QuizLevels level, BindingResult result) {
 		
-		ProgrammingLanguage pl = languagesServices.findOne(languages.getIdLanguage());
-		pl.setLanguage(languages.getLanguage());
-		pl.setStatus(languages.getStatus());
+		QuizLevels ql = QlevelServices.findOne(level.getIdLevel());
+		ql.setLevel(level.getLevel());
+		ql.setStatus(level.getStatus());
 		
-		languagesServices.save(pl);		
+		QlevelServices.save(ql);		
 		
-		return new ModelAndView("redirect:/Quizz/addLanguages");
+		return new ModelAndView("redirect:/Level/addLevel");
 	}	
 	
 }

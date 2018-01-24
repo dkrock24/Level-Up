@@ -130,7 +130,7 @@ border:1px solid grey;
 					<div class="row">
 						<div class="col-lg-3 col-sm-6">
 							<div class="card">
-								<div class="content" style="background:#C0C0C0">
+								<div class="content">
 									<div class="row">
 										<div class="col-xs-5">
 											<div class="icon-big icon-danger text-center">
@@ -157,7 +157,7 @@ border:1px solid grey;
 						</div>
 						<div class="col-lg-3 col-sm-6">
 							<div class="card">
-								<div class="content">
+								<div class="content" style="background:#C0C0C0">
 									<div class="row">
 										<div class="col-xs-5">
 											<div class="icon-big icon-success text-center">
@@ -175,7 +175,7 @@ border:1px solid grey;
 										<hr />
 										<div class="stats">
 										
-											<a href="/Level/addLevel" class="btn btn-success"><i class="ti-calendar"></i> Add and Updated now</a>
+											<a href="/Level/addLevel" class="btn btn-success" style="color:white"><i class="ti-calendar"></i> Add and Updated now</a>
 											
 										</div>
 									</div>
@@ -202,7 +202,7 @@ border:1px solid grey;
 										<hr />
 										<div class="stats">
 
-											<a href="/QuestionType/index" class="btn btn-info"><i class="ti-timer"></i> Add and Updated now</a>
+											<a href="addLanguages" class="btn btn-info"><i class="ti-timer"></i> Add and Updated now</a>
 											
 										</div>
 									</div>
@@ -242,7 +242,7 @@ border:1px solid grey;
 						<div class="col-md-12">
 							<div class="card">
 								<div class="header">
-									<h4 class="title">Add Programming Languages</h4>
+									<h4 class="title">Add Level Programming Languages</h4>
 									<p class="category">Form</p>
 								</div>
 								<div class="content">
@@ -251,16 +251,16 @@ border:1px solid grey;
 										<div class="col-md-6">
 											<div class="card">
 												<div class="content table-responsive table-full-width">
-												<form action="saveLanguage" method="post" modelAttribute="ProgrammingLanguage">
+												<form action="saveLevel" method="post" modelAttribute="QuizLevels">
 													<table class="table">
 														<thead class="alert alert-info">															
-															<th>Language Name</th>
-															<th>Language Status</th>																
+															<th>Level Name</th>
+															<th>Level Status</th>																
 															<th>Actions</th>
 														</thead>
 														<tbody>
 															<tr>
-																<td><input type="text" name="language" class="form-control line" placeholder="Language Name"/></td>														
+																<td><input type="text" name="level" class="form-control line" placeholder="Level Name"/></td>														
 																<td>
 																	<select name="status" class="form-control line">
 																	<option value="1">Enabled</option>
@@ -285,20 +285,20 @@ border:1px solid grey;
 													<table class="table table-striped">
 														<thead class="alert alert-info">
 															<th>ID</th>
-															<th>Language Name</th>
-															<th>Language Status</th>															
+															<th>Level Name</th>
+															<th>Level Status</th>															
 															<th>Actions</th>
 														</thead>
-														<tbody th:each="languages,iteration : ${ pl }">
+														<tbody th:each="level,iteration : ${ ql }">
 															<tr>
 																<td th:text="${ iteration.index+1 }"></td>																
-																<td th:text="${ languages.language }"></td>
-																<td th:switch="${ languages.status }">
+																<td th:text="${ level.level}"></td>
+																<td th:switch="${ level.status }">
 																	<label th:case="1" class="label label-success" style="color:white">Active</label>
 																	<label th:case="0" class="label label-warning" style="color:white">Inactive</label>
 																</td>
 																<td>
-																<a th:href="@{'editLanguages/' + ${languages.idLanguage} }" class="btn btn-default">Edit</a>
+																<a th:href="@{'editLevel/' + ${level.idLevel} }" class="btn btn-default">Edit</a>
 																</td>
 															</tr>
 														</tbody>

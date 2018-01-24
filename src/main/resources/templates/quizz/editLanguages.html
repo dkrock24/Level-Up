@@ -148,7 +148,7 @@ border:1px solid grey;
 										<hr />
 										<div class="stats">
 											
-											<a href="/Quizz/addLanguages" class="btn btn-danger"><i class="ti-plus"></i> Add and Updated now</a>
+											<a href="../addLanguages" class="btn btn-danger"><i class="ti-plus"></i> Add and Updated now</a>
 											
 										</div>
 									</div>
@@ -175,7 +175,7 @@ border:1px solid grey;
 										<hr />
 										<div class="stats">
 										
-											<a href="/Level/addLevel" class="btn btn-success"><i class="ti-calendar"></i> Add and Updated now</a>
+											<a href="addLanguages" class="btn btn-success"><i class="ti-calendar"></i> Add and Updated now</a>
 											
 										</div>
 									</div>
@@ -202,7 +202,7 @@ border:1px solid grey;
 										<hr />
 										<div class="stats">
 
-											<a href="/QuestionType/index" class="btn btn-info"><i class="ti-timer"></i> Add and Updated now</a>
+											<a href="addLanguages" class="btn btn-info"><i class="ti-timer"></i> Add and Updated now</a>
 											
 										</div>
 									</div>
@@ -251,7 +251,10 @@ border:1px solid grey;
 										<div class="col-md-6">
 											<div class="card">
 												<div class="content table-responsive table-full-width">
-												<form action="saveLanguage" method="post" modelAttribute="ProgrammingLanguage">
+												<form action="../updateLanguage" method="post" modelAttribute="ProgrammingLanguage">
+												
+													<input type="hidden" name="idLanguage" class="form-control" th:value="${languages.idLanguage}" />
+													
 													<table class="table">
 														<thead class="alert alert-info">															
 															<th>Language Name</th>
@@ -260,17 +263,20 @@ border:1px solid grey;
 														</thead>
 														<tbody>
 															<tr>
-																<td><input type="text" name="language" class="form-control line" placeholder="Language Name"/></td>														
-																<td>
-																	<select name="status" class="form-control line">
-																	<option value="1">Enabled</option>
-																	<option value="0">Disabled</option>
-																	</select>
+																<td><input type="text" name="language" class="form-control line" th:value="${languages.language}" /></td>														
+																<td>																	
+																	<select name="status" class="form-control">																																									
+
+																			<option th:selected="(${languages.status} == *{1})" value="1">Active</option>
+																			<option th:selected="(${languages.status} != *{1})" value="0">Inactive</option>
+																			
+																		</select>
+																		
 																</td>															
 																<td>
-																	<input type="submit" name="send" value="Create" class="btn btn-info" />
+																	<input type="submit" name="send" value="Save" class="btn btn-info" />
 																</td>
-															</tr>
+															</tr >
 														</tbody>
 													</table>
 												</form>
@@ -286,7 +292,7 @@ border:1px solid grey;
 														<thead class="alert alert-info">
 															<th>ID</th>
 															<th>Language Name</th>
-															<th>Language Status</th>															
+															<th>Language Status</th>		
 															<th>Actions</th>
 														</thead>
 														<tbody th:each="languages,iteration : ${ pl }">
@@ -298,7 +304,7 @@ border:1px solid grey;
 																	<label th:case="0" class="label label-warning" style="color:white">Inactive</label>
 																</td>
 																<td>
-																<a th:href="@{'editLanguages/' + ${languages.idLanguage} }" class="btn btn-default">Edit</a>
+																<a th:href="@{'../editLanguages/' + ${languages.idLanguage} }" class="btn btn-default">Edit</a>
 																</td>
 															</tr>
 														</tbody>

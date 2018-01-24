@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.focus.levelup.model.ProgrammingLanguage;
+import com.focus.levelup.model.QuestionTypes;
+import com.focus.levelup.model.QuizLevels;
 import com.focus.levelup.model.Users;
 import com.focus.levelup.services.ProgrammingLanguageService;
+import com.focus.levelup.services.QuestionTypesService;
 import com.focus.levelup.services.QuizLevelsService;
 import com.focus.levelup.services.QuizzesServices;
 import com.focus.levelup.services.TestsService;
@@ -22,8 +25,8 @@ import com.focus.levelup.services.TestsService;
 
 
 @Controller
-@RequestMapping("Quizz")
-public class QuizzController {
+@RequestMapping("QuestionType")
+public class QuestionType {
 	
 	@Autowired
 	ProgrammingLanguageService languagesServices;
@@ -36,6 +39,9 @@ public class QuizzController {
 	
 	@Autowired
 	TestsService testServices;
+	
+	@Autowired
+	QuestionTypesService questionType;
 
 	@RequestMapping("index")
 	public String index(Model model) {
@@ -50,15 +56,15 @@ public class QuizzController {
 		model.addAttribute("countQuizz", countQuizz);
 		model.addAttribute("countPendingTest", countPendingTest);
 		
-		return "quizz/indexLanguages";
+		return "questionType/addQuestionType";
 	}
 	
-	@RequestMapping("addLanguages")
-	public String addLanguages(Model model) {
+	@RequestMapping("addQuestionType")
+	public String addQuestionType(Model model) {
 		
-		List<ProgrammingLanguage> pl = (List<ProgrammingLanguage>) languagesServices.findAll();
+		List<QuestionTypes> qt = (List<QuestionTypes>) questionType.findAll();
 		
-		model.addAttribute("pl",pl);
+		model.addAttribute("qt",qt);
 		
 		// Basic Count 
 		int countLanguages = (int) languagesServices.count();
@@ -72,53 +78,55 @@ public class QuizzController {
 		model.addAttribute("countPendingTest", countPendingTest);
 		// End Basic Count
 		
-		return "quizz/addLanguages";
+		return "questionType/addQuestionType";
 	}
 	
 	/*
 	 * SAVE NEW PROGRAMMING LANGUAGES
 	 */
-	@RequestMapping("saveLanguage")
-	public ModelAndView saveLanguage(@ModelAttribute("ProgrammingLanguage") ProgrammingLanguage languages, BindingResult result) {
+	@RequestMapping("saveQestionType")
+	public ModelAndView saveQestionType(@ModelAttribute("QuestionTypes") QuestionTypes types, BindingResult result) {
 		
-		ProgrammingLanguage pl = new ProgrammingLanguage();
-		pl.setLanguage(languages.getLanguage());
-		pl.setStatus(languages.getStatus());
+		QuestionTypes type = new QuestionTypes();
+		type.setType(types.getType());
+		type.setFriendlyName(types.getFriendlyName());
+		type.setStatus(types.getStatus());
 		
-		languagesServices.save(pl);
+		questionType.save(type);
 		
-		return new ModelAndView("redirect:/Quizz/addLanguages");
+		return new ModelAndView("redirect:/QuestionType/addQuestionType");
 	}	
 	
 	/*
 	 * EDIT PROGRAMMING LANGUAGES
 	 */
-	@RequestMapping(value ="editLanguages/{id}", method= RequestMethod.GET)
-	public String editLanguage(Model model,@PathVariable int id) {
+	@RequestMapping(value ="editQuestionType/{id}", method= RequestMethod.GET)
+	public String editLevel(Model model,@PathVariable int id) {
 		
-		List<ProgrammingLanguage> pl = (List<ProgrammingLanguage>) languagesServices.findAll();			
-		ProgrammingLanguage pl_edit = languagesServices.findOne(id);
+		List<QuestionTypes> qt = (List<QuestionTypes>) questionType.findAll();			
+		QuestionTypes qt_edit = questionType.findOne(id);
 		
-		model.addAttribute("pl",pl);
-		model.addAttribute("languages", pl_edit);
+		model.addAttribute("qt",qt);
+		model.addAttribute("inputs", qt_edit);
 		
-		return ("quizz/editLanguages");
+		return ("questionType/editQuestionType");
 	}
 	
 	
 	/*
 	 * UPDATE PROGRAMMING LANGUAGES
 	 */
-	@RequestMapping("updateLanguage")
-	public ModelAndView updateLanguage(@ModelAttribute("ProgrammingLanguage") ProgrammingLanguage languages, BindingResult result) {
+	@RequestMapping("updateQuestionType")
+	public ModelAndView updateQuestionType(@ModelAttribute("QuestionTypes") QuestionTypes types, BindingResult result) {
 		
-		ProgrammingLanguage pl = languagesServices.findOne(languages.getIdLanguage());
-		pl.setLanguage(languages.getLanguage());
-		pl.setStatus(languages.getStatus());
+		QuestionTypes qt = questionType.findOne(types.getIdType());
+		qt.setType(types.getType());
+		qt.setFriendlyName(types.getFriendlyName());
+		qt.setStatus(types.getStatus());
 		
-		languagesServices.save(pl);		
+		questionType.save(qt);		
 		
-		return new ModelAndView("redirect:/Quizz/addLanguages");
+		return new ModelAndView("redirect:/QuestionType/addQuestionType");
 	}	
 	
 }
