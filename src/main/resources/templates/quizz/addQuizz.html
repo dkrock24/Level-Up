@@ -251,20 +251,18 @@
 										<thead>
 											<th>Languages</th>
 											<th>Level</th>
-
 											<th>Description</th>
 											<th>Status</th>
-
 											<th><a th:href="@{'/Quizz/index/' }"
 												class="btn btn-info">Back</a></th>
 										</thead>
-										<tbody th:each="quizz : ${ quizzes }">
+										<tbody>
 											<tr>
-												<td><select name="idLanguage" class="form-control">
+												<td><select name="ProgrammingLanguage" class="form-control">
 														<option th:each="lg : ${ languages }" th:value="${ lg.idLanguage }" th:text="${ lg.language }"></option>
 												</select>
 												</td>
-												<td><select name="level" class="form-control">
+												<td><select name="QuizLevel" class="form-control">
 														<option th:each="ql : ${ ql }" th:value="${ ql.idLevel }" th:text="${ ql.level }"></option>
 												</select>
 												</td>
@@ -273,7 +271,7 @@
 												<input type="text" name="description" value="" placeholder="Description" class="form-control"/>
 												</td>
 
-												<td th:switch="${ quizz.status }">
+												<td th:switch="${ quizzes.status }">
 													<select name="status" class="form-control">
 														<option value="1">Enable</option>
 														<option value="0">Disabled</option>

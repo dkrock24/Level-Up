@@ -1,7 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!-- HEADER -->
-<head th:replace="fragments/header :: header"></head>
+
+<head>
+<meta charset="utf-8" />
+<link rel="apple-touch-icon" sizes="76x76"
+	th:href="@{ assets/img/apple-icon.png }" />
+<link rel="icon" type="image/png" sizes="96x96"
+	th:href="@{assets/img/favicon.png }" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<title>Level-Up</title>
+
+<meta
+	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+	name='viewport' />
+<meta name="viewport" content="width=device-width" />
+
+
+<!-- Bootstrap core CSS     -->
+<link th:href="@{ /assets/css/bootstrap.min.css }" rel="stylesheet" />
+
+<!-- Animation library for notifications   -->
+<link th:href="@{ /assets/css/animate.min.css }" rel="stylesheet" />
+
+<!--  Paper Dashboard core CSS    -->
+<link th:href="@{ /assets/css/paper-dashboard.css }" rel="stylesheet" />
+
+
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link th:href="@{ /assets/css/demo.css }" rel="stylesheet" />
+
+
+<!--  Fonts and icons     -->
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+	rel="stylesheet" />
+<link href='https://fonts.googleapis.com/css?family=Muli:400,300'
+	rel='stylesheet' type='text/css' />
+<link th:href="@{ /assets/css/themify-icons.css }" rel="stylesheet" />
+
+</head>
 <body>
 
 	<div class="wrapper">
@@ -201,110 +239,119 @@
 					</div>
 					<div class="row">
 
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<div class="card">
 								<div class="header">
-									<h4 class="title">Quizz Admin</h4>
-									<p class="category">Quizzes Created</p>
+									<h2 class="title"><i class="ti-pencil"></i></h2>
+									<p class="category">Questions Section</p>
 								</div>
 								<div class="content table-responsive table-full-width">
+								<form action="../saveQuizz" method="post" modelAttribute="Questions"> 
 									<table class="table table-hover">
 										<thead>
-											<th>ID</th>
-											<th>Level</th>
-											<th>Languages</th>
-											<th>Description</th>
-											<th>Admin</th>
-											<th>Status</th>
-											<th>Created</th>
-											<th>Updated</th>
-											<th><a
-													th:href="@{'/Quizz/addQuizz/' }"
-													class="btn btn-info">New Quizz</a></th>
+											<th class="alert alert-info">Entity</th>
+											<th class="alert alert-info">Value</th>
 										</thead>
-										<tbody th:each="quizz, iteration : ${ quizzes }">
+										<tbody>
 											<tr>
-												<td th:text="${ iteration.index+1 }"></td>
-												<td th:text="${ quizz.QuizLevel.level }"></td>
-												<td th:text="${ quizz.ProgrammingLanguage.language }"></td>
-												<td th:text="${ quizz.description }"></td>
-												<td th:text="${ quizz.User.firstName }+'.'+ ${ quizz.User.lastName }"></td>										
-												
-												<td th:switch="${ quizz.status }"><label
-													th:case="1" class="label label-success"
-													style="color: white">Active</label> <label th:case="0"
-													class="label label-warning" style="color: white">Inactive</label>
+												<td>Input Type</td>
+												<td><select name="QuestionTypes" class="form-control">
+														<option th:each="qt : ${ questionTypes }" th:value="${ qt.idType}" th:text="${ qt.type }"></option>
+												</select>
 												</td>
-												<td th:text="${ quizz.createdOn }"></td>
-												<td th:text="${ quizz.updatedOn }"></td>
-												<td><a
-													th:href="@{'/Quizz/editQuizz/' + ${ quizz.idQuiz } }"
-													class="btn btn-success">Edit</a>
-													<a
-													th:href="@{'/Quizz/editQuizz/' + ${ quizz.idQuiz } }"
-													class="btn btn-info">Detail</a>
-													</td>
+											</tr>	
+											<tr>
+												<td>Question</td>
+												<td><textarea class="form-control" name="question"></textarea></td>
+											</tr>	
+											<tr>
+												<td>Status</td>
+												<td><select name="status" class="form-control">
+														<option value="1">Enable</option>
+														<option value="0">Disabled</option>
+													</select></td>
 											</tr>
-
+											<tr>
+												<td></td>
+												<td><input type="submit" name="send" value="Save" class="form-control btn btn-info"/></td>
+											</tr>
 										</tbody>
 									</table>
-
+									</form>								
+									
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row">
 						<div class="col-md-6">
 							<div class="card">
 								<div class="header">
-									<h4 class="title">Email Statistics</h4>
-									<p class="category">Last Campaign Performance</p>
+									<h2 class="title"><i class="ti-pencil"></i></h2>
+									<p class="category">Answers Section</p>
 								</div>
-								<div class="content">
-									<div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-
-									<div class="footer">
-										<div class="chart-legend">
-											<i class="fa fa-circle text-info"></i> Open <i
-												class="fa fa-circle text-danger"></i> Bounce <i
-												class="fa fa-circle text-warning"></i> Unsubscribe
-										</div>
-										<hr />
-										<div class="stats">
-											<i class="ti-timer"></i> Campaign sent 2 days ago
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="card ">
-								<div class="header">
-									<h4 class="title">2015 Sales</h4>
-									<p class="category">All products including Taxes</p>
-								</div>
-								<div class="content">
-									<div id="chartActivity" class="ct-chart"></div>
-
-									<div class="footer">
-										<div class="chart-legend">
-											<i class="fa fa-circle text-info"></i> Tesla Model S <i
-												class="fa fa-circle text-warning"></i> BMW 5 Series
-										</div>
-										<hr />
-										<div class="stats">
-											<i class="ti-check"></i> Data information certified
-										</div>
-									</div>
+								<div class="content table-responsive table-full-width">
+								<form action="../saveQuizz" method="post" modelAttribute="Questions"> 
+									<table class="table table-hover">
+										<thead>
+											<th class="alert alert-success">Entity</th>
+											<th class="alert alert-success">Value</th>
+										</thead>
+										<tbody>											
+											<tr>
+												<td>Answer</td>
+												<td><textarea class="form-control" name="question"></textarea></td>
+											</tr>	
+											<tr>
+												<td>Score</td>
+												<td><input type="text" class="form-control" name="score"/></td>
+											</tr>	
+											<tr>
+												<td>Status</td>
+												<td><select name="status" class="form-control">
+														<option value="1">Enable</option>
+														<option value="0">Disabled</option>
+													</select></td>
+											</tr>
+											<tr>
+												<td></td>
+												<td><input type="submit" name="send" value="Save" class="form-control btn btn-info"/></td>
+											</tr>
+										</tbody>
+									</table>
+									</form>								
+									
 								</div>
 							</div>
-						</div>
+						</div>					
+						
+						
 					</div>
+
 				</div>
 			</div>
 
-			<!-- Footer -->
-			<div th:replace="fragments/footer :: footer"></div>
+
+			<footer class="footer">
+				<div class="container-fluid">
+					<nav class="pull-left">
+						<ul>
+
+							<li><a href="http://www.creative-tim.com"> Creative Tim
+							</a></li>
+							<li><a href="http://blog.creative-tim.com"> Blog </a></li>
+							<li><a href="http://www.creative-tim.com/license">
+									Licenses </a></li>
+						</ul>
+					</nav>
+					<div class="copyright pull-right">
+						&copy;
+						<script>
+							document.write(new Date().getFullYear())
+						</script>
+						, made with <i class="fa fa-heart heart"></i> by <a
+							href="http://www.creative-tim.com">Creative Tim</a>
+					</div>
+				</div>
+			</footer>
 
 		</div>
 	</div>
