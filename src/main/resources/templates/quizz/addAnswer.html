@@ -239,93 +239,163 @@
 					</div>
 					<div class="row">
 
-						<div class="col-md-3">
+						<div class="col-md-12">
 							<div class="card">
-								<div class="header">
+								<div class="header alert alert-warning">
 									<h2 class="title">
 										<i class="ti-pencil"></i>
-									</h2>
-									<p class="category">Questions Section for :</p>
-									<p
-										th:text="${ quizz.ProgrammingLanguage.language } +' - '+ ${ quizz.QuizLevel.level } +' - '+ ${ quizz.description }"></p>
+										<span class="category">Answer Section</span>
+										<a th:href="@{'../addQuestion/'+ ${ question.Quizze.idQuiz }}" class="btn btn-default" style="float:right">Back</a>
+									</h2>								
+									
 								</div>
 								<div class="content table-responsive table-full-width">
-									<form action="../saveQuestion" method="post"
-										modelAttribute="Questions">
-										
-										<input type="hidden" name="Quizze" th:value="${ quizz.idQuiz }"/>
-										
-										<table class="table table-hover">
-											<thead>
-												<th class="alert alert-info">Entity</th>
-												<th class="alert alert-info">Value</th>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Input Type</td>
-													<td><select name="QuestionType" class="form-control">
-															<option th:each="qt : ${ questionTypes }"
-																th:value="${ qt.idType }" th:text="${ qt.type }"></option>
-													</select></td>
-												</tr>
-												<tr>
-													<td>Question</td>
-													<td><textarea class="form-control" name="question"></textarea></td>
-												</tr>
-												<tr>
-													<td>Status</td>
-													<td><select name="status" class="form-control">
-															<option value="1">Enable</option>
-															<option value="0">Disabled</option>
-													</select></td>
-												</tr>
-												<tr>
-													<td></td>
-													<td><input type="submit" name="send" value="Save"
-														class="form-control btn btn-info" /></td>
-												</tr>
-											</tbody>
-										</table>
-									</form>
 
+									<div class="row">
+										<div class="col-md-4">
+											<div class="card card-user">
+												<div class="image">
+													<img th:src="@{ /assets/img/pols_feature24.jpg } "
+														alt="..." />
+												</div>
+												<div class="content">
+													<div class="author">
+														<img class="avatar border-white"
+															th:src="@{ /assets/img/faces/question.jpg}" alt="..." />
+														<h4 class="title">
+														<table class="table">
+															<tr>
+																<td>Quizz : </td>
+																<td><span th:text="${ question.Quizze.description }"></span></td>
+															</tr>
+															<tr>
+																<td>Languages : </td>
+																<td><span th:text="${ question.Quizze.ProgrammingLanguage.language }"></span></td>
+															</tr>
+															<tr>
+																<td>Level : </td>
+																<td><span th:text="${ question.Quizze.QuizLevel.level }"></span></td>
+															</tr>
+														</table>
+															Question: <br />
+														</h4>
+													</div>
+													<p class="description text-center">
+														<span th:text="${ question.question }"></span>
+													</p>
+												</div>
+												<hr />
+												<div class="text-center">
+													<div class="row">
+														<div class="col-md-3 col-md-offset-1">
+															<h5>
+																Type<br /> <small> <label
+																	th:text="${ question.QuestionType.friendlyName }"
+																	class="label label-warning" style="color: white">Disable</label>
+																</small>
+															</h5>
+														</div>
+														<div class="col-md-4">
+															<h5>
+																Status<br /> <small th:switch="${ question.status }">
+																	<label th:case="0" class="label label-warning"
+																	style="color: white">Disable</label> <label th:case="1"
+																	class="label label-success" style="color: white">Enable</label>
+																</small>
+															</h5>
+														</div>
+														<div class="col-md-3">
+															<h5>
+																Created<br /> <small><label
+																	th:text="${#dates.format(question.createdOn, 'dd-MMM-yyyy')}"
+																	class="label label-warning" style="color: white"></label></small>
+															</h5>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-md-8">
+
+											<div class="card">
+												<div class="content table-responsive table-full-width">
+													<form action="../saveAnswer" method="post" modelAttribute="Answer">
+														
+														<input type="hidden" name="Question" th:value="${ question.idQuestions }"/>
+														
+														<table class="table table-hover">
+															<thead>
+
+																<th class="alert alert-info">Answer</th>
+																<th class="alert alert-info">Score</th>
+																<th class="alert alert-info">Status</th>
+																<th class="alert alert-info"></th>
+															</thead>
+															<tbody>
+																<tr>
+																	<td><input type="text" name="answer"
+																		class="form-control border-input" placeholder="Answer" /></td>
+																	<td><input type="text" name="score"
+																		class="form-control border-input" placeholder="Score" value="0" /></td>
+																	<td><select name="status"
+																		class="form-control border-input">
+																			<option value="0">Incorrect</option>
+																			<option value="1">Correct</option>
+																	</select></td>
+																	<td><input type="submit" value="Create"
+																		class="form-control border-input" /></td>
+																</tr>
+															</tbody>
+														</table>
+													</form>
+												</div>
+											</div>
+
+											<div class="card">
+												<div class="content table-responsive table-full-width">
+													<table class="table table-hover">
+														<thead>
+															<th class="alert alert-info">ID</th>
+															<th class="alert alert-info">Answer</th>
+															<th class="alert alert-info">Score</th>
+															<th class="alert alert-info">Status</th>
+															<th class="alert alert-info">Created</th>
+															<th class="alert alert-info">Updated</th>
+															<th class="alert alert-info"></th>
+														</thead>
+														<tbody>
+															<tr th:each="answer ,iteration : ${ answer }">
+																<td th:text="${ iteration.index+1 }"></td>
+																<td th:text="${ answer.answer }"></td>
+																<td th:text="${ answer.score }"></td>
+																<td th:switch="${ answer.status }"><label
+																	th:case="0" class="label label-warning"
+																	style="color: white">Incorrect</label> <label
+																	th:case="1" class="label label-success"
+																	style="color: white">Correct</label></td>
+																<td
+																	th:text="${#dates.format( answer.createdOn, 'dd-MMM-yyyy' ) }"></td>
+																<td
+																	th:text="${#dates.format( answer.updatedOn, 'dd-MMM-yyyy' ) }"></td>
+																<td><a
+																	th:href="@{'../editAnswer/'+${ answer.idAnswer } }"
+																	class="btn btn-primary">Edit</a><a
+																	th:href="@{'../editQuestion/'+${ answer.idAnswer } }"
+																	class="btn btn-primary">Delete</a></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+
+										</div>
+
+
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-9">
-							<div class="card">
-								<div class="header">
-									<h2 class="title">
-										<i class="ti-pencil-alt"></i>
-									</h2>
-									<p class="category">Question List</p>
-									<p>...</p>
-								</div>
-								<div class="content table-responsive table-full-width">
-									<table class="table table-hover">
-										<thead>
-											<th class="alert alert-info">ID</th>
-											<th class="alert alert-info">Question</th>
-											<th class="alert alert-info">Type</th>
-											<th class="alert alert-info">Status</th>
-											<th class="alert alert-info"></th>
-										</thead>
-										<tbody>
-											<tr th:each="q ,iteration : ${ question }">
-												<td th:text="${ iteration.index+1 }"></td>
-												<td th:text="${ q.question }"></td>
-												<td th:text="${ q.QuestionType.type}"></td>
-												<td th:switch="${ q.status }"><label th:case="0"
-													class="label label-warning" style="color: white">Inactive</label>
-													<label th:case="1" class="label label-success"
-													style="color: white">Active</label></td>
-												<td><a th:href="@{'../editQuestion/'+${q.idQuestions} }" class="btn btn-primary">Edit Question</a><a th:href="@{'../addAnswer/'+${q.idQuestions} }" class="btn btn-primary">Add Answer</a></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-
 
 					</div>
 

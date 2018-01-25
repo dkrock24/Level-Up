@@ -239,91 +239,95 @@
 					</div>
 					<div class="row">
 
-						<div class="col-md-6">
+						<div class="col-md-3">
 							<div class="card">
 								<div class="header">
-									<h2 class="title"><i class="ti-pencil"></i></h2>
-									<p class="category">Questions Section</p>
+									<h2 class="title">
+										<i class="ti-pencil"></i>
+									</h2>
+									<p class="category">Questions Section for :</p>
+									<p
+										th:text="${ question.Quizze.ProgrammingLanguage.language } +' - '+ ${ question.Quizze.QuizLevel.level } +' - '+ ${ question.Quizze.description }"></p>
 								</div>
 								<div class="content table-responsive table-full-width">
-								<form action="../saveQuizz" method="post" modelAttribute="Questions"> 
-									<table class="table table-hover">
-										<thead>
-											<th class="alert alert-info">Entity</th>
-											<th class="alert alert-info">Value</th>
-										</thead>
-										<tbody>
-											<tr>
-												<td>Input Type</td>
-												<td><select name="QuestionTypes" class="form-control">
-														<option th:each="qt : ${ questionTypes }" th:value="${ qt.idType}" th:text="${ qt.type }"></option>
-												</select>
-												</td>
-											</tr>	
-											<tr>
-												<td>Question</td>
-												<td><textarea class="form-control" name="question"></textarea></td>
-											</tr>	
-											<tr>
-												<td>Status</td>
-												<td><select name="status" class="form-control">
-														<option value="1">Enable</option>
-														<option value="0">Disabled</option>
+									<form action="../updateQuestion" method="post"
+										modelAttribute="Questions">
+												<input type="hidden" name="idQuestions" th:value="${question.idQuestions}"/>								
+										<table class="table table-hover">
+											<thead>
+												<th class="alert alert-info">Entity</th>
+												<th class="alert alert-info">Value</th>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Input Type</td>
+													<td><select name="QuestionType" class="form-control">
+															<option th:each="qt : ${ questionType }" th:value="${ qt.idType }" th:text="${ qt.type }" th:selected="(${question.QuestionType.type} == *{qt.type})"></option>
 													</select></td>
-											</tr>
-											<tr>
-												<td></td>
-												<td><input type="submit" name="send" value="Save" class="form-control btn btn-info"/></td>
-											</tr>
-										</tbody>
-									</table>
-									</form>								
-									
+												</tr>
+												<tr>
+													<td>Question</td>
+													<td><textarea class="form-control" name="question" th:text="${question.question}"></textarea></td>
+												</tr>
+												<tr>
+													<td>Status</td>
+													<td><select name="status" class="form-control">																																								
+														<option th:selected="(${question.status} == *{1})" value="1">Active</option>
+														<option th:selected="(${question.status} != *{1})" value="0">Inactive</option>
+													</select></td>
+												</tr>
+												<tr>
+													<td></td>
+													<td><input type="submit" name="send" value="Save"
+														class="form-control btn btn-info" /></td>
+												</tr>
+											</tbody>
+										</table>
+									</form>
+
 								</div>
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-9">
 							<div class="card">
 								<div class="header">
-									<h2 class="title"><i class="ti-pencil"></i></h2>
-									<p class="category">Answers Section</p>
+									<h2 class="title">
+										<i class="ti-pencil-alt"></i>
+									</h2>
+									<p class="category">Question List</p>
+									<p>...</p>
 								</div>
 								<div class="content table-responsive table-full-width">
-								<form action="../saveQuizz" method="post" modelAttribute="Questions"> 
 									<table class="table table-hover">
 										<thead>
-											<th class="alert alert-success">Entity</th>
-											<th class="alert alert-success">Value</th>
+											<th class="alert alert-info">ID</th>
+											<th class="alert alert-info">Question</th>
+											<th class="alert alert-info">Type</th>
+											<th class="alert alert-info">Status</th>
+											<th class="alert alert-info">CreatedOn</th>
+											<th class="alert alert-info">UpdatedOn</th>
+											<th class="alert alert-info"></th>
 										</thead>
-										<tbody>											
-											<tr>
-												<td>Answer</td>
-												<td><textarea class="form-control" name="question"></textarea></td>
-											</tr>	
-											<tr>
-												<td>Score</td>
-												<td><input type="text" class="form-control" name="score"/></td>
-											</tr>	
-											<tr>
-												<td>Status</td>
-												<td><select name="status" class="form-control">
-														<option value="1">Enable</option>
-														<option value="0">Disabled</option>
-													</select></td>
-											</tr>
-											<tr>
-												<td></td>
-												<td><input type="submit" name="send" value="Save" class="form-control btn btn-info"/></td>
+										<tbody>
+											<tr th:each="q ,iteration : ${ question }">
+												<td th:text="${ iteration.index+1 }"></td>
+												<td th:text="${ q.question }"></td>
+												<td th:text="${ q.QuestionType.type}"></td>												
+												<td th:switch="${ q.status }"><label th:case="0"
+													class="label label-warning" style="color: white">Inactive</label>
+													<label th:case="1" class="label label-success"
+													style="color: white">Active</label></td>
+												<td th:text="${ q.createdOn}"></td>
+												<td th:text="${ q.updatedOn}"></td>
+												<td><a th:href="@{'../addQuestion/'+${ q.Quizze.idQuiz } }" class="btn btn-primary">Back</a></td>
 											</tr>
 										</tbody>
 									</table>
-									</form>								
-									
 								</div>
 							</div>
-						</div>					
-						
-						
+						</div>
+
+
 					</div>
 
 				</div>
