@@ -321,9 +321,9 @@
 
 											<div class="card">
 												<div class="content table-responsive table-full-width">
-													<form action="../saveAnswer" method="post" modelAttribute="Answer">
+													<form action="../updateAnswer" method="post" modelAttribute="Answer">
 														
-														<input type="hidden" name="Question" th:value="${ question.idQuestions }"/>
+														<input type="hidden" name="Answer" th:value="${ answerOne.idAnswer }"/>
 														
 														<table class="table table-hover">
 															<thead>
@@ -344,7 +344,7 @@
 																			<option th:selected="(${answerOne.status} == *{0})" value="1">Correct</option>
 																			<option th:selected="(${answerOne.status} != *{1})" value="0">Incorrect</option>
 																	</select></td>
-																	<td><input type="submit" value="Create"
+																	<td><input type="submit" value="Update"
 																		class="form-control border-input" /></td>
 																</tr>
 															</tbody>

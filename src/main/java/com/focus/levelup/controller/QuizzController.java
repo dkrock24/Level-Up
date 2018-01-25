@@ -355,6 +355,24 @@ public class QuizzController {
 		return "quizz/editAnswer";
 	}
 	
+	// 	Update Answer
+	@RequestMapping(value="updateAnswer", method=RequestMethod.POST)
+	public ModelAndView updateAnswer(Model model, @ModelAttribute("Answer") Answer answer, BindingResult result) {
+		
+		Answer answers = answerServices.findOne(answer.getIdAnswer());
+		
+		Date date = new Date();
+		
+		answers.setAnswer(answer.getAnswer());
+		answers.setScore(answer.getScore());
+		answers.setStatus(answer.getStatus());
+		answers.setUpdatedOn(date);
+		
+		answerServices.save(answers);		
+			
+		return new ModelAndView("redirect:/Quizz/addAnswer/"+ answers.getQuestion().getIdQuestions());
+	}
+	
 	
 	
 	
