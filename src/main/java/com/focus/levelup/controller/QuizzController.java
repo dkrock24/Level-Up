@@ -375,7 +375,9 @@ public class QuizzController {
 		return new ModelAndView("redirect:/Quizz/addAnswer/"+ answers.getQuestion().getIdQuestions());
 	}
 	
-	
+	/*
+	 * END ANSWER SECTION ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	 */
 	
 	
 	@RequestMapping(value="editQuizz/{id}", method= RequestMethod.GET )

@@ -241,40 +241,36 @@
 
 						<div class="col-md-3">
 							<div class="card">
-								<div class="header">
+								<div class="header alert alert-warning">
 									<h2 class="title">
 										<i class="ti-pencil"></i>
-									</h2>
-									<p class="category">Questions Section for :</p>
-									<p
-										th:text="${ quizz.ProgrammingLanguage.language } +' - '+ ${ quizz.QuizLevel.level } +' - '+ ${ quizz.description }"></p>
+										<span class="category">New Quizz :</span>
+									</h2>									
+									
 								</div>
 								<div class="content table-responsive table-full-width">
+								<p th:text="'Detail : ' + ${ quizz.ProgrammingLanguage.language } +' / '+ ${ quizz.QuizLevel.level } +' / '+ ${ quizz.description }" style="text-align:center"></p>
 									<form action="../saveQuestion" method="post"
 										modelAttribute="Questions">
 										
 										<input type="hidden" name="Quizze" th:value="${ quizz.idQuiz }"/>
 										
 										<table class="table table-hover">
-											<thead>
-												<th class="alert alert-info">Entity</th>
-												<th class="alert alert-info">Value</th>
-											</thead>
 											<tbody>
 												<tr>
 													<td>Input Type</td>
-													<td><select name="QuestionType" class="form-control">
+													<td><select name="QuestionType" class="form-control border-input">
 															<option th:each="qt : ${ questionTypes }"
 																th:value="${ qt.idType }" th:text="${ qt.type }"></option>
 													</select></td>
 												</tr>
 												<tr>
 													<td>Question</td>
-													<td><textarea class="form-control" name="question"></textarea></td>
+													<td><textarea class="form-control border-input" name="question"></textarea></td>
 												</tr>
 												<tr>
 													<td>Status</td>
-													<td><select name="status" class="form-control">
+													<td><select name="status" class="form-control border-input">
 															<option value="1">Enable</option>
 															<option value="0">Disabled</option>
 													</select></td>
@@ -282,7 +278,7 @@
 												<tr>
 													<td></td>
 													<td><input type="submit" name="send" value="Save"
-														class="form-control btn btn-info" /></td>
+														class="form-control btn btn-info border-input" /></td>
 												</tr>
 											</tbody>
 										</table>
@@ -293,21 +289,20 @@
 						</div>
 						<div class="col-md-9">
 							<div class="card">
-								<div class="header">
+								<div class="header alert alert-warning">
 									<h2 class="title">
 										<i class="ti-pencil-alt"></i>
+										<span class="category">Question List</span>
 									</h2>
-									<p class="category">Question List</p>
-									<p>...</p>
 								</div>
 								<div class="content table-responsive table-full-width">
 									<table class="table table-hover">
 										<thead>
-											<th class="alert alert-info">ID</th>
-											<th class="alert alert-info">Question</th>
-											<th class="alert alert-info">Type</th>
-											<th class="alert alert-info">Status</th>
-											<th class="alert alert-info"></th>
+											<th >ID</th>
+											<th >Question</th>
+											<th >Type</th>
+											<th >Status</th>
+											<th ></th>
 										</thead>
 										<tbody>
 											<tr th:each="q ,iteration : ${ question }">

@@ -241,9 +241,12 @@
 
 						<div class="col-md-12">
 							<div class="card">
-								<div class="header">
-									<h4 class="title">Quizz Admin</h4>
-									<p class="category">Quizzes Created</p>
+								<div class="header alert alert-warning">
+									<h2 class="title">
+										<i class="ti-layers-alt"></i>
+										<span class="category">Created Quizz</span>
+										<a th:href="@{'/Quizz/index/' }" class="btn btn-default" style="float:right">Back</a>
+									</h2>
 								</div>
 								<div class="content table-responsive table-full-width">
 								<form action="../saveQuizz" method="post" modelAttribute="Quizzes"> 
@@ -253,83 +256,35 @@
 											<th>Level</th>
 											<th>Description</th>
 											<th>Status</th>
-											<th><a th:href="@{'/Quizz/index/' }"
-												class="btn btn-info">Back</a></th>
+											<th></th>
 										</thead>
 										<tbody>
 											<tr>
-												<td><select name="ProgrammingLanguage" class="form-control">
+												<td><select name="ProgrammingLanguage" class="form-control border-input">
 														<option th:each="lg : ${ languages }" th:value="${ lg.idLanguage }" th:text="${ lg.language }"></option>
 												</select>
 												</td>
-												<td><select name="QuizLevel" class="form-control">
+												<td><select name="QuizLevel" class="form-control border-input">
 														<option th:each="ql : ${ ql }" th:value="${ ql.idLevel }" th:text="${ ql.level }"></option>
 												</select>
 												</td>
 
 												<td>
-												<input type="text" name="description" value="" placeholder="Description" class="form-control"/>
+												<input type="text" name="description" value="" placeholder="Description" class="form-control border-input"/>
 												</td>
 
 												<td th:switch="${ quizzes.status }">
-													<select name="status" class="form-control">
+													<select name="status" class="form-control border-input">
 														<option value="1">Enable</option>
 														<option value="0">Disabled</option>
 													</select>
 												</td>
-												<td><input type="submit" name="send" value="Save" class="form-control btn btn-info"/></td>
+												<td><input type="submit" name="send" value="Save" class="form-control btn btn-info border-input"/></td>
 											</tr>
 										</tbody>
 									</table>
 									</form>
 
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="card">
-								<div class="header">
-									<h4 class="title">Email Statistics</h4>
-									<p class="category">Last Campaign Performance</p>
-								</div>
-								<div class="content">
-									<div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-
-									<div class="footer">
-										<div class="chart-legend">
-											<i class="fa fa-circle text-info"></i> Open <i
-												class="fa fa-circle text-danger"></i> Bounce <i
-												class="fa fa-circle text-warning"></i> Unsubscribe
-										</div>
-										<hr />
-										<div class="stats">
-											<i class="ti-timer"></i> Campaign sent 2 days ago
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="card ">
-								<div class="header">
-									<h4 class="title">2015 Sales</h4>
-									<p class="category">All products including Taxes</p>
-								</div>
-								<div class="content">
-									<div id="chartActivity" class="ct-chart"></div>
-
-									<div class="footer">
-										<div class="chart-legend">
-											<i class="fa fa-circle text-info"></i> Tesla Model S <i
-												class="fa fa-circle text-warning"></i> BMW 5 Series
-										</div>
-										<hr />
-										<div class="stats">
-											<i class="ti-check"></i> Data information certified
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>
