@@ -53,7 +53,7 @@ public class QuizzController {
 	@RequestMapping("index")
 	public String index(Model model) {
 		
-		List<Quizzes> quizzes = (List<Quizzes>) quizzesServices.findAll();		
+		List<Quizzes> quizzes = (List<Quizzes>) quizzesServices.findAllOrderedByIdAsc();
 		
 		int countLanguages = (int) languagesServices.count();
 		int countQLevel = (int) QlevelServices.count();
@@ -73,7 +73,7 @@ public class QuizzController {
 	@RequestMapping("addLanguages")
 	public String addLanguages(Model model) {
 		
-		List<ProgrammingLanguage> pl = (List<ProgrammingLanguage>) languagesServices.findAll();
+		List<ProgrammingLanguage> pl = (List<ProgrammingLanguage>) languagesServices.findAllOrderedByIdAsc();
 		
 		model.addAttribute("pl",pl);
 		
@@ -113,7 +113,7 @@ public class QuizzController {
 	@RequestMapping(value ="editLanguages/{id}", method= RequestMethod.GET)
 	public String editLanguage(Model model,@PathVariable int id) {
 		
-		List<ProgrammingLanguage> pl = (List<ProgrammingLanguage>) languagesServices.findAll();			
+		List<ProgrammingLanguage> pl = (List<ProgrammingLanguage>) languagesServices.findAllOrderedByIdAsc();			
 		ProgrammingLanguage pl_edit = languagesServices.findOne(id);
 		
 		model.addAttribute("pl",pl);
@@ -145,7 +145,7 @@ public class QuizzController {
 	@RequestMapping(value ="addQuizz")
 	public String addQuizz(Model model) {
 		
-		List<Quizzes> quizzes = (List<Quizzes>) quizzesServices.findAll();		
+		List<Quizzes> quizzes = (List<Quizzes>) quizzesServices.findAllOrderedByIdAsc();		
 		
 		int countLanguages = (int) languagesServices.count();
 		int countQLevel = (int) QlevelServices.count();
@@ -160,7 +160,7 @@ public class QuizzController {
 		model.addAttribute("quizzes",quizzes);
 		
 		// Services		
-		List<ProgrammingLanguage> pl = (List<ProgrammingLanguage>) languagesServices.findAll();	
+		List<ProgrammingLanguage> pl = (List<ProgrammingLanguage>) languagesServices.findAllOrderedByIdAsc();	
 		List<QuizLevels> ql = (List<QuizLevels>) QlevelServices.findAll();
 		
 		model.addAttribute("languages",pl);
@@ -208,7 +208,7 @@ public class QuizzController {
 		// GET Question
 		model.addAttribute("question",question);
 		
-		List<Quizzes> quizzes = (List<Quizzes>) quizzesServices.findAll();		
+		List<Quizzes> quizzes = (List<Quizzes>) quizzesServices.findAllOrderedByIdAsc();		
 		
 		int countLanguages = (int) languagesServices.count();
 		int countQLevel = (int) QlevelServices.count();
@@ -223,7 +223,7 @@ public class QuizzController {
 		model.addAttribute("quizzes",quizzes);
 		
 		// Services		
-		List<QuestionTypes> questionTypes = (List<QuestionTypes>) questionTypeServices.findAll();
+		List<QuestionTypes> questionTypes = (List<QuestionTypes>) questionTypeServices.findAllOrderedByIdAsc();
 		List<QuizLevels> ql = (List<QuizLevels>) QlevelServices.findAll();
 		
 		model.addAttribute("questionTypes", questionTypes);
@@ -235,7 +235,7 @@ public class QuizzController {
 	@RequestMapping(value="editQuizz/{id}", method= RequestMethod.GET )
 	public String editQuizz(Model model, @PathVariable int id) {
 		
-		List<ProgrammingLanguage> pl = (List<ProgrammingLanguage>) languagesServices.findAll();	
+		List<ProgrammingLanguage> pl = (List<ProgrammingLanguage>) languagesServices.findAllOrderedByIdAsc();	
 		List<QuizLevels> ql = (List<QuizLevels>) QlevelServices.findAll();		
 		Quizzes quizz = quizzesServices.findOne(id);
 		

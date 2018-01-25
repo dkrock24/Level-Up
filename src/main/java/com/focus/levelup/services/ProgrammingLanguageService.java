@@ -10,6 +10,12 @@ import com.focus.levelup.model.ProgrammingLanguage;
 
 public interface ProgrammingLanguageService extends CrudRepository<ProgrammingLanguage, Integer> {
 
+	@Query("SELECT p FROM ProgrammingLanguage p ORDER BY p.idLanguage ASC")
+	List<ProgrammingLanguage> findAllOrderedByIdAsc();
+
+	@Query("SELECT p FROM ProgrammingLanguage p ORDER BY p.idLanguage DESC")
+	List<ProgrammingLanguage> findAllOrderedByIdDesc();
+
 	@Query("SELECT p FROM ProgrammingLanguage p WHERE p.status = :status")
 	List<ProgrammingLanguage> findAllByStatus(@Param("status") int status);
 }

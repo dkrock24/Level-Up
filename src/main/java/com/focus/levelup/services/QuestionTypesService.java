@@ -10,6 +10,12 @@ import com.focus.levelup.model.QuestionTypes;
 
 public interface QuestionTypesService extends CrudRepository<QuestionTypes, Integer> {
 
+	@Query("SELECT q FROM QuestionTypes q ORDER BY q.idType ASC")
+	List<QuestionTypes> findAllOrderedByIdAsc();
+
+	@Query("SELECT q FROM QuestionTypes q ORDER BY q.idType DESC")
+	List<QuestionTypes> findAllOrderedByIdDesc();
+
 	@Query("SELECT q FROM QuestionTypes q WHERE q.status = :status")
 	List<QuestionTypes> findAllByStatus(@Param("status") int status);
 }

@@ -10,6 +10,14 @@ import com.focus.levelup.model.Users;
 
 public interface UserService extends CrudRepository<Users, Integer> {
 
+	// Get all users ascending ordered
+	@Query("SELECT u FROM Users u ORDER BY t.idUser ASC")
+	List<Users> findAllOrderedByIdAsc();
+
+	// Get all users descending ordered
+	@Query("SELECT u FROM Users u ORDER BY t.idUser DESC")
+	List<Users> findAllOrderedByIdDesc();
+
 	// Get all users by status passed
 	@Query("SELECT u FROM Users u WHERE u.status = :status")
 	List<Users> findAllByStatus(@Param("status") int status);

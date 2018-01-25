@@ -10,6 +10,12 @@ import com.focus.levelup.model.Answer;
 
 public interface AnswerService extends CrudRepository<Answer, Integer> {
 
+	@Query("SELECT a FROM Answer a ORDER BY a.idAnswer ASC")
+	List<Answer> findAllOrderedByIdAsc();
+
+	@Query("SELECT a FROM Answer a ORDER BY a.idAnswer DESC")
+	List<Answer> findAllOrderedByIdDesc();
+
 	@Query("SELECT a FROM Answer a WHERE a.status = :status")
 	List<Answer> findAllByStatus(@Param("status") int status);
 

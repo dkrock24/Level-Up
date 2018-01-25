@@ -10,6 +10,14 @@ import com.focus.levelup.model.Quizzes;
 
 public interface QuizzesServices extends CrudRepository<Quizzes, Integer> {
 
+	// Get all quizzes ascending ordered
+	@Query("SELECT q FROM Quizzes q ORDER BY q.idQuiz ASC")
+	List<Quizzes> findAllOrderedByIdAsc();
+
+	// Get all quizzes descending ordered
+	@Query("SELECT q FROM Quizzes q ORDER BY q.idQuiz DESC")
+	List<Quizzes> findAllOrderedByIdDesc();
+
 	// Get all quizzes by status
 	@Query("SELECT q FROM Quizzes q WHERE q.status = :status")
 	List<Quizzes> findAllByStatus(@Param("status") int status);

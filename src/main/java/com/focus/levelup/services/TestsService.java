@@ -10,6 +10,12 @@ import com.focus.levelup.model.Tests;
 
 public interface TestsService extends CrudRepository<Tests, Integer> {
 
+	@Query("SELECT t FROM Tests t ORDER BY t.idTest ASC")
+	List<Tests> findAllOrderedByIdAsc();
+
+	@Query("SELECT t FROM Tests t ORDER BY t.idTest DESC")
+	List<Tests> findAllOrderedByIdDesc();
+
 	@Query("SELECT t FROM Tests t WHERE t.status = :status")
 	List<Tests> findAllByStatus(@Param("status") int status);
 }

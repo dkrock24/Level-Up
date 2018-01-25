@@ -10,6 +10,12 @@ import com.focus.levelup.model.Roles;
 
 public interface RoleServices extends CrudRepository<Roles, Integer>{
 
+	@Query("SELECT r FROM Roles r ORDER BY r.idRole ASC")
+	List<Roles> findAllOrderedByIdAsc();
+
+	@Query("SELECT r FROM Roles r ORDER BY r.idRole DESC")
+	List<Roles> findAllOrderedByIdDesc();
+
 	@Query("SELECT r FROM Roles r WHERE r.status = :status")
 	List<Roles> findAllByStatus(@Param("status") int status);
 }
