@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.focus.levelup.model.Answer;
 import com.focus.levelup.model.ProgrammingLanguage;
 import com.focus.levelup.model.QuestionTypes;
 import com.focus.levelup.model.Questions;
 import com.focus.levelup.model.QuizLevels;
 import com.focus.levelup.model.Quizzes;
 import com.focus.levelup.model.Users;
+import com.focus.levelup.services.AnswerService;
 import com.focus.levelup.services.ProgrammingLanguageService;
 import com.focus.levelup.services.QuestionTypesService;
 import com.focus.levelup.services.QuestionsService;
@@ -34,25 +36,28 @@ import com.focus.levelup.services.UserService;
 public class QuizzController {
 	
 	@Autowired
-	ProgrammingLanguageService languagesServices;
+	private ProgrammingLanguageService languagesServices;
 	
 	@Autowired
-	QuizLevelsService QlevelServices;
+	private QuizLevelsService QlevelServices;
 	
 	@Autowired
-	QuizzesServices quizzesServices;
+	private QuizzesServices quizzesServices;
 	
 	@Autowired
-	TestsService testServices;
+	private TestsService testServices;
 	
 	@Autowired
-	UserService userServices;
+	private UserService userServices;
 	
 	@Autowired
-	QuestionTypesService questionTypeServices;
+	private QuestionTypesService questionTypeServices;
 	
 	@Autowired
-	QuestionsService questionServices;
+	private QuestionsService questionServices;
+	
+	@Autowired
+	private AnswerService answerServices; 
 
 	@RequestMapping("index")
 	public String index(Model model) {
@@ -293,6 +298,65 @@ public class QuizzController {
 	/*
 	 * END QUESTION SECTION ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	 */
+	
+	/*
+	 * ANSWER SECTION ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	 */
+		
+	@RequestMapping(value="addAnswer/{idQuestion}", method=RequestMethod.GET)
+	public String addAnsware(Model model, @PathVariable int idQuestion) {
+		
+		Questions question = questionServices.findOne(idQuestion);
+		
+		List<Answer> answers = question.getAnswers();		
+		
+		model.addAttribute("question", question );
+		model.addAttribute("answer", answers );
+		
+		return "quizz/addAnswer";
+	}
+	
+	// Save Answer
+	@RequestMapping(value="saveAnswer", method=RequestMethod.POST)
+	public ModelAndView saveAnswer(@ModelAttribute("Answer") Answer answer, BindingResult result) {
+		
+		Date date = new Date();
+		Answer answers = new Answer();
+		
+		answers.setQuestion(answer.getQuestion());
+		answers.setAnswer(answer.getAnswer());
+		answers.setScore(answer.getScore());
+		answers.setStatus(answer.getStatus());
+		answers.setCreatedOn(date);
+		answers.setUpdatedOn(date);
+		answers.setCreatedBy("Test");
+		answers.setUpdatedBy("Test");
+		
+		answerServices.save(answers);
+		
+		return new ModelAndView("redirect:/Quizz/addAnswer/"+ answers.getQuestion().getIdQuestions());
+	}
+	
+	
+	// Edit Answer
+	@RequestMapping(value="editAnswer/{idAnswer}", method=RequestMethod.GET)
+	public String editAnswer(Model model, @PathVariable int idAnswer) {
+		
+		Answer answer = answerServices.findOne(idAnswer);
+		model.addAttribute("answerOne", answer);
+		
+		Questions question = questionServices.findOne(answer.getQuestion().getIdQuestions());
+		
+		List<Answer> answers = question.getAnswers();		
+		
+		model.addAttribute("question", question );
+		model.addAttribute("answer", answers );
+		
+		return "quizz/editAnswer";
+	}
+	
+	
+	
 	
 	@RequestMapping(value="editQuizz/{id}", method= RequestMethod.GET )
 	public String editQuizz(Model model, @PathVariable int id) {
