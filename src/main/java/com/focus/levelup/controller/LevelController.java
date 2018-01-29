@@ -37,19 +37,17 @@ public class LevelController {
 	
 	@Autowired
 	TestsService testServices;
+	
+	@Autowired
+	QuizzController quizzcontroller;
 
 	@RequestMapping("index")
 	public String index(Model model) {
-		
-		int countLanguages = (int) languagesServices.count();
-		int countQLevel = (int) QlevelServices.count();
-		int countQuizz = (int) quizzesServices.count();
-		int countPendingTest = (int) testServices.count();
-				
-		model.addAttribute("totalLanguages", countLanguages);
-		model.addAttribute("totalLevels", countQLevel);
-		model.addAttribute("countQuizz", countQuizz);
-		model.addAttribute("countPendingTest", countPendingTest);
+						
+		model.addAttribute("totalLanguages", quizzcontroller.totalProgramming());
+		model.addAttribute("totalLevels", quizzcontroller.totalLevels());
+		model.addAttribute("countQuizz", quizzcontroller.totalQuizz());
+		model.addAttribute("countPendingTest", quizzcontroller.totalPendingTest());
 		
 		return "quizzLevel/indexLevel";
 	}
@@ -61,17 +59,10 @@ public class LevelController {
 		
 		model.addAttribute("ql",ql);
 		
-		// Basic Count 
-		int countLanguages = (int) languagesServices.count();
-		int countQLevel = (int) QlevelServices.count();
-		int countQuizz = (int) quizzesServices.count();
-		int countPendingTest = (int) testServices.count();
-				
-		model.addAttribute("totalLanguages", countLanguages);
-		model.addAttribute("totalLevels", countQLevel);
-		model.addAttribute("countQuizz", countQuizz);
-		model.addAttribute("countPendingTest", countPendingTest);
-		// End Basic Count
+		model.addAttribute("totalLanguages", quizzcontroller.totalProgramming());
+		model.addAttribute("totalLevels", quizzcontroller.totalLevels());
+		model.addAttribute("countQuizz", quizzcontroller.totalQuizz());
+		model.addAttribute("countPendingTest", quizzcontroller.totalPendingTest());
 		
 		return "quizzLevel/addLevel";
 	}

@@ -24,7 +24,7 @@ border:1px solid grey;
 			<div class="sidebar-wrapper">
 				<div class="logo">
 					<a href="http://www.creative-tim.com" class="simple-text">
-						Creative Tim </a>
+						Level-Up </a>
 				</div>
 
 				<ul class="nav">
@@ -209,7 +209,6 @@ border:1px solid grey;
 							<div class="card">
 								<div class="header">
 									<h4 class="title">Add Programming Languages</h4>
-									<p class="category">Form</p>
 								</div>
 								<div class="content">
 								
@@ -219,16 +218,16 @@ border:1px solid grey;
 												<div class="content table-responsive table-full-width">
 												<form action="saveLanguage" method="post" modelAttribute="ProgrammingLanguage">
 													<table class="table">
-														<thead class="alert alert-info">															
+														<thead class="alert alert-danger">															
 															<th>Language Name</th>
 															<th>Language Status</th>																
 															<th>Actions</th>
 														</thead>
 														<tbody>
 															<tr>
-																<td><input type="text" name="language" class="form-control line" placeholder="Language Name"/></td>														
+																<td><input type="text" name="language" class="form-control border-input" placeholder="Language Name" required="required" /></td>														
 																<td>
-																	<select name="status" class="form-control line">
+																	<select name="status" class="form-control border-input">
 																	<option value="1">Enabled</option>
 																	<option value="0">Disabled</option>
 																	</select>
@@ -248,8 +247,8 @@ border:1px solid grey;
 										<div class="col-md-6">
 											<div class="monthly-grid">
 												<div class="content table-responsive table-full-width">
-													<table class="table table-striped">
-														<thead class="alert alert-info">
+													<table class="table table-hover">
+														<thead class="alert alert-danger">
 															<th>ID</th>
 															<th>Language Name</th>
 															<th>Language Status</th>															

@@ -241,23 +241,19 @@
 
 						<div class="col-md-3">
 							<div class="card">
-								<div class="header">
+								<div class="header alert alert-warning">
 									<h2 class="title">
 										<i class="ti-pencil"></i>
+										<span class="category">Test Name :</span>
 									</h2>
-									<p class="category">Questions Section for :</p>
-									<p
-										th:text="${ question.Quizze.ProgrammingLanguage.language } +' - '+ ${ question.Quizze.QuizLevel.level } +' - '+ ${ question.Quizze.description }"></p>
+									
+									<p><b th:text="${ question.Quizze.ProgrammingLanguage.language } +' - '+ ${ question.Quizze.QuizLevel.level } +' - '+ ${ question.Quizze.description }" style="color:black; text-align:rightr"></b></p>
 								</div>
 								<div class="content table-responsive table-full-width">
 									<form action="../updateQuestion" method="post"
 										modelAttribute="Questions">
 												<input type="hidden" name="idQuestions" th:value="${question.idQuestions}"/>								
 										<table class="table table-hover">
-											<thead>
-												<th class="alert alert-info">Entity</th>
-												<th class="alert alert-info">Value</th>
-											</thead>
 											<tbody>
 												<tr>
 													<td>Input Type</td>
@@ -290,23 +286,23 @@
 						</div>
 						<div class="col-md-9">
 							<div class="card">
-								<div class="header">
+								<div class="header alert alert-warning">
 									<h2 class="title">
 										<i class="ti-pencil-alt"></i>
+										<span class="category">Question</span>
 									</h2>
-									<p class="category">Question List</p>
-									<p>...</p>
+									<br/>
 								</div>
 								<div class="content table-responsive table-full-width">
 									<table class="table table-hover">
 										<thead>
-											<th class="alert alert-info">ID</th>
-											<th class="alert alert-info">Question</th>
-											<th class="alert alert-info">Type</th>
-											<th class="alert alert-info">Status</th>
-											<th class="alert alert-info">CreatedOn</th>
-											<th class="alert alert-info">UpdatedOn</th>
-											<th class="alert alert-info"></th>
+											<th class="">ID</th>
+											<th class="">Question</th>
+											<th class="">Type</th>
+											<th class="">Status</th>
+											<th class="">CreatedOn</th>
+											<th class="">UpdatedOn</th>
+											<th class=""></th>
 										</thead>
 										<tbody>
 											<tr th:each="q ,iteration : ${ question }">

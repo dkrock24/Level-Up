@@ -63,16 +63,11 @@ public class QuizzController {
 	public String index(Model model) {
 		
 		List<Quizzes> quizzes = (List<Quizzes>) quizzesServices.findAllOrderedByIdAsc();
-		
-		int countLanguages = (int) languagesServices.count();
-		int countQLevel = (int) QlevelServices.count();
-		int countQuizz = (int) quizzesServices.count();
-		int countPendingTest = (int) testServices.count();
 				
-		model.addAttribute("totalLanguages", countLanguages);
-		model.addAttribute("totalLevels", countQLevel);
-		model.addAttribute("countQuizz", countQuizz);
-		model.addAttribute("countPendingTest", countPendingTest);
+		model.addAttribute("totalLanguages", totalProgramming());
+		model.addAttribute("totalLevels", totalLevels());
+		model.addAttribute("countQuizz", totalQuizz());
+		model.addAttribute("countPendingTest", totalPendingTest());
 		
 		model.addAttribute("quizzes",quizzes);
 		
@@ -85,18 +80,11 @@ public class QuizzController {
 		List<ProgrammingLanguage> pl = (List<ProgrammingLanguage>) languagesServices.findAllOrderedByIdAsc();
 		
 		model.addAttribute("pl",pl);
-		
-		// Basic Count 
-		int countLanguages = (int) languagesServices.count();
-		int countQLevel = (int) QlevelServices.count();
-		int countQuizz = (int) quizzesServices.count();
-		int countPendingTest = (int) testServices.count();
-				
-		model.addAttribute("totalLanguages", countLanguages);
-		model.addAttribute("totalLevels", countQLevel);
-		model.addAttribute("countQuizz", countQuizz);
-		model.addAttribute("countPendingTest", countPendingTest);
-		// End Basic Count
+						
+		model.addAttribute("totalLanguages", totalProgramming());
+		model.addAttribute("totalLevels", totalLevels());
+		model.addAttribute("countQuizz", totalQuizz());
+		model.addAttribute("countPendingTest", totalPendingTest());
 		
 		return "quizz/addLanguages";
 	}
@@ -155,16 +143,11 @@ public class QuizzController {
 	public String addQuizz(Model model) {
 		
 		List<Quizzes> quizzes = (List<Quizzes>) quizzesServices.findAllOrderedByIdAsc();		
-		
-		int countLanguages = (int) languagesServices.count();
-		int countQLevel = (int) QlevelServices.count();
-		int countQuizz = (int) quizzesServices.count();
-		int countPendingTest = (int) testServices.count();
-				
-		model.addAttribute("totalLanguages", countLanguages);
-		model.addAttribute("totalLevels", countQLevel);
-		model.addAttribute("countQuizz", countQuizz);
-		model.addAttribute("countPendingTest", countPendingTest);
+						
+		model.addAttribute("totalLanguages", totalProgramming());
+		model.addAttribute("totalLevels", totalLevels());
+		model.addAttribute("countQuizz", totalQuizz());
+		model.addAttribute("countPendingTest", totalPendingTest());
 		
 		model.addAttribute("quizzes",quizzes);
 		
@@ -222,17 +205,11 @@ public class QuizzController {
 		List<Quizzes> quizzes = (List<Quizzes>) quizzesServices.findAllOrderedByIdAsc();		
 			
 		model.addAttribute("quizzes",quizzes);
-
-		
-		int countLanguages = (int) languagesServices.count();
-		int countQLevel = (int) QlevelServices.count();
-		int countQuizz = (int) quizzesServices.count();
-		int countPendingTest = (int) testServices.count();
 				
-		model.addAttribute("totalLanguages", countLanguages);
-		model.addAttribute("totalLevels", countQLevel);
-		model.addAttribute("countQuizz", countQuizz);
-		model.addAttribute("countPendingTest", countPendingTest);	
+		model.addAttribute("totalLanguages", totalProgramming());
+		model.addAttribute("totalLevels", totalLevels());
+		model.addAttribute("countQuizz", totalQuizz());
+		model.addAttribute("countPendingTest", totalPendingTest());	
 		
 		// Services		
 		List<QuestionTypes> questionTypes = (List<QuestionTypes>) questionTypeServices.findAllOrderedByIdAsc();
@@ -375,6 +352,16 @@ public class QuizzController {
 		return new ModelAndView("redirect:/Quizz/addAnswer/"+ answers.getQuestion().getIdQuestions());
 	}
 	
+	@RequestMapping(value = "deleteAnswer/{id}", method = RequestMethod.GET )
+	public ModelAndView deleteAnswer(@PathVariable int id ) {
+		
+		Answer answer = answerServices.findOne(id);
+		
+		answerServices.delete(answer.getIdAnswer());		
+		
+		return new ModelAndView("redirect:/Quizz/addAnswer/"+ answer.getQuestion().getIdQuestions());
+	}
+	
 	/*
 	 * END ANSWER SECTION ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	 */
@@ -415,6 +402,40 @@ public class QuizzController {
 		
 		return new ModelAndView("redirect:/Quizz/index");
 	}
+	
+	
+	/*
+	 * Total Programming Languages ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	 */
+	
+	public int totalProgramming() {
+		
+		int countLanguages = (int) languagesServices.count();		
+		return countLanguages;
+	}
+	
+	public int totalLevels() {
+		
+		int countQLevel = (int) QlevelServices.count();
+		return countQLevel;
+	}
+	
+	public int totalQuizz() {
+		
+		int countQuizz = (int) quizzesServices.count();
+		return countQuizz;
+	}
+	
+	public int totalPendingTest() {
+		
+		int countPendingTest = (int) testServices.count();
+		return countPendingTest;
+	}
+	
+	
+	
+	
+	
 	
 	
 	

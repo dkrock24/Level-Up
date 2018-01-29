@@ -2,7 +2,10 @@ package com.focus.levelup.controller;
 
 import java.util.List;
 
+import javax.management.relation.Role;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +30,9 @@ public class UsersController {
 	@Autowired
 	RoleServices roleServices;
 	
+	@Autowired
+	BCryptPasswordEncoder encrypte;
+	
 	@RequestMapping("index")
 	public String users(Model model) {
 		
@@ -35,6 +41,32 @@ public class UsersController {
 		model.addAttribute("users", user);
 		
 		return "users/index";
+	}
+	
+	@RequestMapping("newUser")
+	public String newUser(Model model) {
+		
+		List<Roles> role = (List<Roles>) roleServices.findAll();
+		model.addAttribute("roles", role);
+			
+		return "users/newUser";
+	}
+	
+	@RequestMapping(value= "saveUser", method = RequestMethod.POST)
+	public ModelAndView saveUser(@ModelAttribute("Users") Users users, BindingResult result ) {
+		
+		Users user =  new Users();
+		
+		user.setRole(users.getRole());		
+		user.setFirstName(users.getFirstName());
+		user.setLastName(users.getLastName());
+		user.setEmail(users.getEmail());
+		user.setStatus(users.getStatus());
+		user.setPassword(encrypte.encode(users.getPassword()));
+		
+		usersService.save( user );
+		
+		return new ModelAndView("redirect:/Users/index");
 	}
 	
 	@RequestMapping(value= "edit/{id}", method = RequestMethod.GET)

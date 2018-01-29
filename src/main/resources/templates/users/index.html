@@ -19,14 +19,14 @@
 				</div>
 
 				<ul class="nav">
-					<li ><a href="/Dashboard/index"> <i
-							class="ti-panel"></i>
+					<li><a href="/Dashboard/index"> <i class="ti-panel"></i>
 							<p>Dashboard</p>
 					</a></li>
 					<li><a href="/Roles/index"> <i class="ti-user"></i>
 							<p>Roles</p>
 					</a></li>
-					<li class="active"><a href="Cuser/index"> <i class="ti-view-list-alt"></i>
+					<li class="active"><a href="Cuser/index"> <i
+							class="ti-view-list-alt"></i>
 							<p>Users</p>
 					</a></li>
 					<li><a href="/Quizz/index"> <i class="ti-pencil-alt2"></i>
@@ -190,49 +190,47 @@
 
 						<div class="col-md-12">
 							<div class="card">
-								<div class="header">
-									<h4 class="title">Users</h4>
-									<p class="category">Admin Users</p>
+								<div class="header alert alert-warning">
+									<h2 class="title">
+										<i class="ti-user"></i>User Admin <a
+											th:href="@{'/Users/newUser' }" class="btn btn-default"
+											style="float: right">New</a>
+									</h2>
+
 								</div>
 								<div class="content">
-									<div class="row">
-										<div class="col-md-12">
-											<div class="card">
-												<div class="content table-responsive table-full-width">
-													<table class="table table-striped">
-														<thead>
-															<th>ID</th>
-															<th>Role Name</th>
-															<th>First Name</th>
-															<th>Last Name</th>
-															<th>Email</th>
-															<th>Passwd</th>
-															<th>Status</th>
-															<th>Actions</th>
-														</thead>
-														<tbody th:each="user,iteration : ${ users }">
-															<tr>
-																<td th:text="${ iteration.index+1 }"></td>
-																<td th:text="${ user.role.role }"></td>
-																<td th:text="${ user.firstName }"></td>
-																<td th:text="${ user.lastName }"></td>
-																<td th:text="${ user.email }"></td>
-																<td th:text="${ user.password }"></td>
-																<td th:switch="${ user.status }">
-																	<label th:case="1" class="label label-success" style="color:white">Active</label>
-																	<label th:case="2" class="label label-warning" style="color:white">Inactive</label>
-																</td>
-																<td>
-																<a th:href="@{'edit/' + ${user.idUser} }" class="btn btn-default">Edit</a>
-																</td>
-															</tr>
-														</tbody>
-													</table>
 
-												</div>
-											</div>
-										</div>
+									<div class="content table-responsive table-full-width">
+										<table class="table table-hover">
+											<thead>
+												<th>ID</th>
+												<th>Role Name</th>
+												<th>First Name</th>
+												<th>Last Name</th>
+												<th>Email</th>
+												<th>Passwd</th>
+												<th>Status</th>
+												<th>Actions</th>
+											</thead>
+											<tbody th:each="user,iteration : ${ users }">
+												<tr>
+													<td th:text="${ iteration.index+1 }"></td>
+													<td th:text="${ user.role.role }"></td>
+													<td th:text="${ user.firstName }"></td>
+													<td th:text="${ user.lastName }"></td>
+													<td th:text="${ user.email }"></td>
+													<td th:text="${ user.password }"></td>
+													<td th:switch="${ user.status }"><label th:case="1"
+														class="label label-success" style="color: white">Active</label>
+														<label th:case="2" class="label label-warning"
+														style="color: white">Inactive</label></td>
+													<td><a th:href="@{'edit/' + ${user.idUser} }"
+														class="btn btn-default">Edit</a></td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
+
 								</div>
 							</div>
 						</div>

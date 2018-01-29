@@ -325,12 +325,12 @@
 														<input type="hidden" name="Question" th:value="${ question.idQuestions }"/>
 														
 														<table class="table table-hover">
-															<thead>
+															<thead class="alert alert-danger" style="color:white">
 
-																<th class="alert alert-info">Answer</th>
-																<th class="alert alert-info">Score</th>
-																<th class="alert alert-info">Status</th>
-																<th class="alert alert-info"></th>
+																<th>Answer</th>
+																<th>Score</th>
+																<th>Status</th>
+																<th></th>
 															</thead>
 															<tbody>
 																<tr>
@@ -355,14 +355,14 @@
 											<div class="card">
 												<div class="content table-responsive table-full-width">
 													<table class="table table-hover">
-														<thead>
-															<th class="alert alert-info">ID</th>
-															<th class="alert alert-info">Answer</th>
-															<th class="alert alert-info">Score</th>
-															<th class="alert alert-info">Status</th>
-															<th class="alert alert-info">Created</th>
-															<th class="alert alert-info">Updated</th>
-															<th class="alert alert-info"></th>
+														<thead class="alert alert-danger" style="color:white">
+															<th>ID</th>
+															<th>Answer</th>
+															<th>Score</th>
+															<th>Status</th>
+															<th>Created</th>
+															<th>Updated</th>
+															<th></th>
 														</thead>
 														<tbody>
 															<tr th:each="answer ,iteration : ${ answer }">
@@ -381,7 +381,7 @@
 																<td><a
 																	th:href="@{'../editAnswer/'+${ answer.idAnswer } }"
 																	class="btn btn-primary">Edit</a><a
-																	th:href="@{'../editQuestion/'+${ answer.idAnswer } }"
+																	th:href="@{'../deleteAnswer/'+${ answer.idAnswer } }"
 																	class="btn btn-primary">Delete</a></td>
 															</tr>
 														</tbody>

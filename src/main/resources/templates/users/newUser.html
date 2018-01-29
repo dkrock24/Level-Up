@@ -19,17 +19,17 @@
 				</div>
 
 				<ul class="nav">
-					<li ><a href="/Dashboard/index"> <i
+					<li class="active"><a href="/Dashboard/index"> <i
 							class="ti-panel"></i>
 							<p>Dashboard</p>
 					</a></li>
-					<li class="active"><a href="/Roles/index"> <i class="ti-user"></i>
+					<li><a href="/Roles/index"> <i class="ti-user"></i>
 							<p>Roles</p>
 					</a></li>
-					<li><a href="/Users/index"> <i class="ti-view-list-alt"></i>
+					<li><a href="Cuser/index"> <i class="ti-view-list-alt"></i>
 							<p>Users</p>
 					</a></li>
-					<li><a href="/Quizz/index"> <i class="ti-pencil-alt2"></i>
+					<li><a href="Cquizz/index"> <i class="ti-pencil-alt2"></i>
 							<p>Quizzes</p>
 					</a></li>
 					<li><a href="Ctest/index"> <i class="ti-text"></i>
@@ -52,7 +52,7 @@
 								class="icon-bar bar1"></span> <span class="icon-bar bar2"></span>
 							<span class="icon-bar bar3"></span>
 						</button>
-						<a class="navbar-brand" href="#">ROLES ADMIN</a>
+						<a class="navbar-brand" href="#">User Update</a>
 					</div>
 					<div class="collapse navbar-collapse">
 						<ul class="nav navbar-nav navbar-right">
@@ -191,31 +191,50 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="header alert alert-warning">
-								
 									<h2 class="title">
-										<i class="ti-layers-alt"></i>Admin Roles
-										<a th:href="@{'/Roles/newRole/' }" class="btn btn-default" style="float:right">New</a>
+										<i class="ti-user"></i>Add User
+										<a th:href="@{'/Users/index' }" class="btn btn-default" style="float:right">Back</a>
 									</h2>
-
 								</div>
 								<div class="content">
+									
 												<div class="content table-responsive table-full-width">
-													<table class="table table-hover">
-														<thead>
-															<th>ID</th>
-															<th>Role Name</th>
-															<th>Actions</th>
-														</thead>
-														<tbody th:each="roles,iteration : ${data}">
-															<tr>
-																<td th:text="${ iteration.index+1 }"></td>
-																<td th:text="${ roles.role }"></td>
+													<form action="saveUser" method="post" modelAttribute="Users">
+														<table class="table table-striped">
+															<thead>		
+																<th>Roles Name</th>														
+																<th>First Name</th>
+																<th>Last Name</th>
+																<th>Email</th>
+																<th>Password</th>
+																<th>Status</th>
+																<th>Actions</th>
+															</thead>
+															<tbody>
+																<tr>	
 																<td>
-																<a th:href="@{'edit/' + ${roles.idRole} }" class="btn btn-default">Edit</a>
-																</td>
-															</tr>
-														</tbody>
-													</table>
+																	<select name="Role" class="form-control border-input">																												
+																		<option th:each="role : ${ roles }" th:value="${ role.idRole }" th:text="${role.role}"  ></option>
+																	</select>
+																</td>																
+																	<td><input type="text" value="" class="form-control border-input" name="firstName" /></td>
+																	<td><input type="text" value="" class="form-control border-input" name="lastName" /></td>
+																	<td><input type="text" value="" class="form-control border-input" name="email" /></td>
+																	<td><input type="password" value="" class="form-control border-input" name="password" /></td>
+																	<td>
+																		<select name="status" class="form-control border-input">																																								
+																			<option  value="1">Active</option>
+																			<option  value="2">Inactive</option>																			
+																		</select>
+																	</td>
+																	<td>
+																	<input type="submit" name="Update" value="Create" class="btn btn-default border-input"/>
+																	
+																	<a href="/Users/index" class="btn btn-info">Back</a></td>
+																</tr>
+															</tbody>
+														</table>
+													</form>
 
 												</div>
 					

@@ -42,6 +42,25 @@ public class RolesController {
 		return "roles/update";
 	}
 	
+	@RequestMapping(value= "newRole")
+	public String newRole(Model model) {
+				
+		return "roles/new";
+	}
+	
+	@RequestMapping(value= "saveRole", method = RequestMethod.POST)
+	public ModelAndView saveRole(Model model, @ModelAttribute("Roles") Roles role, BindingResult result) {
+		
+		Roles roles =  new Roles();	
+		
+		roles.setRole(role.getRole());
+		roles.setStatus(1);;
+		
+		roleServices.save(roles);
+		
+		return new ModelAndView("redirect:/Roles/index");
+	}
+	
 	@RequestMapping(value= "saveUpdate", method = RequestMethod.POST)
 	public ModelAndView saveUpdate(Model model, @ModelAttribute("Roles") Roles role, BindingResult result) {
 		
